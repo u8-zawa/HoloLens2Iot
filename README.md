@@ -2,4 +2,5 @@
 
 ### メンバー
 
- - kotaro210
+- kotaro210
+- u8-zawa
