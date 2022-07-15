@@ -1,13 +1,11 @@
 using System;
 using System.Text;
-
 using System.Threading.Tasks;
 using System.Threading;
 
 using MQTTnet;
 using MQTTnet.Client;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class MqttController : MonoBehaviour
 {
@@ -16,6 +14,8 @@ public class MqttController : MonoBehaviour
     private SynchronizationContext context;
     private string host = "mqtt.beebotte.com";
     [SerializeField] private string channel_token;
+
+    private SensorData sensorData;
 
     async void Start()
     {
@@ -68,13 +68,18 @@ public class MqttController : MonoBehaviour
         // メッセージ受信時の処理
         mqttClient.ApplicationMessageReceived += (s, e) =>
         {
+            var topic = e.ApplicationMessage.Topic;
+            var payload = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+            var qos = e.ApplicationMessage.QualityOfServiceLevel;
+            var retain = e.ApplicationMessage.Retain;
+
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("ApplicationMessageReceived");
-            stringBuilder.AppendLine($"Topic = {e.ApplicationMessage.Topic}");
-            stringBuilder.AppendLine($"Payload = {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
-            stringBuilder.AppendLine($"QoS = {e.ApplicationMessage.QualityOfServiceLevel}");
-            stringBuilder.AppendLine($"Retain = {e.ApplicationMessage.Retain}");
-            LogMessage(stringBuilder);
+            stringBuilder.AppendLine($"Topic = {topic}");
+            stringBuilder.AppendLine($"Payload = {payload}");
+            stringBuilder.AppendLine($"QoS = {qos}");
+            stringBuilder.AppendLine($"Retain = {retain}");
+            LogMessage(stringBuilder, payload);
         };
 
         // 接続
@@ -94,7 +99,7 @@ public class MqttController : MonoBehaviour
         await mqttClient.PublishAsync(message);
     }
 
-    async void LogMessage(object message)
+    async void LogMessage(object message, string payload = "")
     {
 #if WINDOWS_UWP
  
@@ -106,7 +111,13 @@ public class MqttController : MonoBehaviour
                 Debug.Log(message);
  
                 // GameObjectなどで描画するならこの中に処理を書く UWP の場合
- 
+                
+                // payloadが設定されていて、中身がJsonの場合
+                if (payload != "" && IsJson(payload))
+                {
+                    sensorData = SensorData.FromJson(payload);
+                    Debug.Log(sensorData.ToString());
+                }
             }, true);
         });
 #elif UNITY_EDITOR
@@ -123,12 +134,18 @@ public class MqttController : MonoBehaviour
 
                 // GameObjectなどで描画するならこの中に処理を書く
 
+                // payloadが設定されていて、中身がJsonの場合
+                if (payload != "" && IsJson(payload))
+                {
+                    sensorData = SensorData.FromJson(payload);
+                    Debug.Log(sensorData.ToString());
+                }
             }, null);
         });
 #endif
     }
 
-    public void getSensorData(string sensor_name)
+    public void GetSensorData(string sensor_name)
     {
         // メッセージの送信するための設定
         var message = new MqttApplicationMessageBuilder()
@@ -140,5 +157,17 @@ public class MqttController : MonoBehaviour
         Task.Run(async () => {
             await mqttClient.PublishAsync(message);
         });
+    }
+
+    private Boolean IsJson(string data)
+    {
+        try
+        {
+            JsonUtility.FromJson<SensorData>(data);
+        } catch 
+        {
+            return false;
+        }
+        return true;
     }
 }
