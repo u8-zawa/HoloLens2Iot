@@ -61,7 +61,7 @@ public class Spawner : MonoBehaviour
         if (isSpawnable)
         {
             // 新しくオブジェクトを生み出す
-            GameObject newObject = Instantiate(prefab);
+            GameObject newObject = Instantiate(prefab, transform.position, Quaternion.identity, transform.parent);
             objects.Add(newObject);
         }
     }
