@@ -18,16 +18,28 @@ public class FloatMove : MonoBehaviour
     private bool isFloating = true;
     // 箱外フラグ
     private bool isOutOfBox = false;
+    // 掴んでいるフラグ
+    private bool isGrabbed = false;
 
-    // Rigidbodyのキャッシュ
-    private Rigidbody _rb;
+    private Rigidbody _rb;  // Rigidbodyのキャッシュ
+    private Vector3 _homePosition;  // 生成時の位置の記憶
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _homePosition = transform.position;
         // Start()と同時に移動を開始する
         StartCoroutine(Floating());
+    }
+
+    private void Update()
+    {
+        // 掴んでいないときに箱の外に出た際は、すぐに初期位置に戻す
+        if(!isGrabbed & isOutOfBox)
+        {
+            transform.position = _homePosition;
+        }
     }
 
     // 数秒おきにオブジェクトに対して力を加える
@@ -86,6 +98,7 @@ public class FloatMove : MonoBehaviour
     // モデルを掴んだときの処理
     public void startGrab()
     {
+        isGrabbed = true;
         // 移動を一旦止める
         endFloat();
     }
@@ -93,6 +106,12 @@ public class FloatMove : MonoBehaviour
     // モデルを離したときの処理
     public void endGrab()
     {
+        isGrabbed = false;
+        // 箱の外にあるときは、初期位置に移動する
+        if (isOutOfBox)
+        {
+            transform.position = _homePosition;
+        }
         // 移動を再開する
         startFloat();
     }
