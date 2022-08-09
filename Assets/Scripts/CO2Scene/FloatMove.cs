@@ -60,4 +60,18 @@ public class FloatMove : MonoBehaviour
     {
         isFloating = false;
     }
+
+    // ƒ‚ƒfƒ‹‚ğ’Í‚ñ‚¾‚Æ‚«‚Ìˆ—
+    public void startGrab()
+    {
+        // ˆÚ“®‚ğˆê’U~‚ß‚é
+        endFloat();
+    }
+
+    // ƒ‚ƒfƒ‹‚ğ—£‚µ‚½‚Æ‚«‚Ìˆ—
+    public void endGrab()
+    {
+        // ˆÚ“®‚ğÄŠJ‚·‚é
+        startFloat();
+    }
 }
