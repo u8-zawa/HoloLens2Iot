@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class FloatMove : MonoBehaviour
 {
+    static private string BoxTag = "CO2Box";
+
     // 加える力の大きさの範囲設定
     [SerializeField] public float minForcePower = 0.1f;
     [SerializeField] public float maxForcePower = 1f;
@@ -14,6 +16,8 @@ public class FloatMove : MonoBehaviour
 
     // 移動の継続フラグ
     private bool isFloating = true;
+    // 箱外フラグ
+    private bool isOutOfBox = false;
 
     // Rigidbodyのキャッシュ
     private Rigidbody _rb;
@@ -59,6 +63,24 @@ public class FloatMove : MonoBehaviour
     public void endFloat()
     {
         isFloating = false;
+    }
+
+    // 箱から出たときの処理
+    public void OnBoxExit(Collider other)
+    {
+        if (other.CompareTag(BoxTag))
+        {
+            isOutOfBox = true;
+        }
+    }
+
+    // 箱に入ったときの処理
+    public void OnBoxEnter(Collider other)
+    {
+        if (other.CompareTag(BoxTag))
+        {
+            isOutOfBox = false;
+        }
     }
 
     // モデルを掴んだときの処理

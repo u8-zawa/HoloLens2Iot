@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 1214873661}
   m_Layer: 0
   m_Name: Clear Cube
-  m_TagString: Untagged
+  m_TagString: CO2Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -509,8 +509,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214873660}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -767,6 +767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 5415798069202116091, guid: 1929e3880896b9749a484329ee140b7f, type: 3}
+  MinNum: 3
   MaxNum: 30
   nowNum: 0
 --- !u!1 &1664011843
