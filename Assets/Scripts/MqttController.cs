@@ -88,6 +88,8 @@ public class MqttController : MonoBehaviour
         // メッセージ受信する購読 subscribe
         await mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("prmn_iot/co2").Build());
         await mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("prmn_iot/temp").Build());
+        await mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("prmn_iot/gsr").Build());
+        await mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("prmn_iot/ud").Build());
 
         // メッセージの送信するための設定
         var message = new MqttApplicationMessageBuilder()
