@@ -10,6 +10,7 @@ public class SensorDataManager : SingletonMonoBehaviorInScene<SensorDataManager>
     public void UpdateData(SensorData data)
     {
         datas[data.name] = data;
+        Debug.Log("SaveData:" + data.ToString());
     }
 
     // ƒZƒ“ƒT[î•ñ‚Ìæ“¾

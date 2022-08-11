@@ -664,6 +664,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1125925883}
   - component: {fileID: 1125925884}
+  - component: {fileID: 1125925886}
+  - component: {fileID: 1125925885}
   m_Layer: 0
   m_Name: SensorController
   m_TagString: Untagged
@@ -697,6 +699,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b90584251e24e44858cbb1cea90f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1125925885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125925882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b84c6ea3183c8ce44b82236e74959d26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  channel_token: 
+--- !u!114 &1125925886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125925882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa50cb9e52100c4196f73ae4e119b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mqttController: {fileID: 1125925885}
+  sensorNames:
+  - co2
+  SensorRequestInterval: 5
+  endFlag: 0
 --- !u!1 &1133039345
 GameObject:
   m_ObjectHideFlags: 0
