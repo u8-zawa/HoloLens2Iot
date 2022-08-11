@@ -665,7 +665,7 @@ GameObject:
   - component: {fileID: 1125925883}
   - component: {fileID: 1125925884}
   m_Layer: 0
-  m_Name: SensorDataManager
+  m_Name: SensorController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
