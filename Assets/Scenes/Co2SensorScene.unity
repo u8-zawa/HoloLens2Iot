@@ -301,9 +301,17 @@ PrefabInstance:
       value: "<size=42><b>\u4E8C\u9178\u5316\u70AD\u7D20\u30BB\u30F3\u30B5\u30FC</b></size>\n\n\u4E8C\u9178\u5316\u70AD\u7D20\u30BB\u30F3\u30B5\u30FC\u304B\u53D6\u5F97\u3057\u305F\u5024\u306B\u5FDC\u3058\u3066\u3001\u4E8C\u9178\u5316\u70AD\u7D20\u5206\u5B50\u3092\u900F\u660E\u306A\u7BB1\u306E\u4E2D\u306B\u6F02\u308F\u305B\u305F\u308A\u3001\u30B0\u30E9\u30D5\u3092\u8868\u793A\u3055\u305B\u305F\u308A\u3059\u308B\u3002"
       objectReference: {fileID: 0}
     - target: {fileID: 2113875699234556495, guid: 18470d71939382448be2ecd06efa9662, type: 3}
+      propertyPath: m_fontSize
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2113875699234556495, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 7ad7b9f19413c64459408266adfde976, type: 2}
+    - target: {fileID: 2113875699234556495, guid: 18470d71939382448be2ecd06efa9662, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 2113875699234556495, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_textAlignment
       value: 65535
@@ -311,7 +319,11 @@ PrefabInstance:
     - target: {fileID: 2113875699234556495, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4200267512604101078, guid: 7ad7b9f19413c64459408266adfde976, type: 2}
+      objectReference: {fileID: -4015562292926907019, guid: 7ad7b9f19413c64459408266adfde976, type: 2}
+    - target: {fileID: 2113875699234556495, guid: 18470d71939382448be2ecd06efa9662, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2113875699234556495, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_TextStyleHashCode
       value: -1183493901
@@ -974,6 +986,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342498017}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1379684482 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8359743410951189687, guid: 18470d71939382448be2ecd06efa9662, type: 3}
+  m_PrefabInstance: {fileID: 271135123}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1379684484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379684482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b73acd26ad89844b8bb46c04c0fac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner: {fileID: 1598394725}
+  textFormat: "<size=42><b>\u4E8C\u9178\u5316\u70AD\u7D20\u30BB\u30F3\u30B5\u30FC</b></size>\n\n\u4E8C\u9178\u5316\u70AD\u7D20\u30BB\u30F3\u30B5\u30FC\u304B\u53D6\u5F97\u3057\u305F\u5024\u306B\u5FDC\u3058\u3066\u3001\u4E8C\u9178\u5316\u70AD\u7D20\u5206\u5B50\u3092\u900F\u660E\u306A\u7BB1\u306E\u4E2D\u306B\u6F02\u308F\u305B\u305F\u308A\u3001\u30B0\u30E9\u30D5\u3092\u8868\u793A\u3055\u305B\u305F\u308A\u3059\u308B\u3002\n\n\u73FE\u5728\u306E\u4E8C\u9178\u5316\u70AD\u7D20\u6FC3\u5EA6:
+    {0}\n\u4E8C\u9178\u5316\u70AD\u7D20\u5206\u5B50\u306E\u500B\u6570: {1}\u500B"
 --- !u!1 &1540102544
 GameObject:
   m_ObjectHideFlags: 0
