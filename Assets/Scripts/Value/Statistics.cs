@@ -4,7 +4,7 @@ using System.Text;
 [Serializable]
 public class Statistics
 {
-    public string latest;
+    public int latest;
     public float avg;
     public int max;
     public int min;

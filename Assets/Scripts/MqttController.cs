@@ -119,6 +119,8 @@ public class MqttController : MonoBehaviour
                 {
                     sensorData = SensorData.FromJson(payload);
                     Debug.Log(sensorData.ToString());
+
+                    MemorySensorData(sensorData);
                 }
             }, true);
         });
@@ -141,6 +143,8 @@ public class MqttController : MonoBehaviour
                 {
                     sensorData = SensorData.FromJson(payload);
                     Debug.Log(sensorData.ToString());
+
+                    MemorySensorData(sensorData);
                 }
             }, null);
         });
@@ -171,5 +175,14 @@ public class MqttController : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    // SensorDataManagerÇ™ë∂ç›ÇµÇƒÇ¢ÇÍÇŒÅASensorDataÇäiî[ÇµÇƒï€ë∂Ç∑ÇÈ
+    private void MemorySensorData(SensorData data)
+    {
+        if( SensorDataManager.Instance != null)
+        {
+            SensorDataManager.Instance.UpdateData(data);
+        }
     }
 }
