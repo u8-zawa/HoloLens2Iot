@@ -25,7 +25,7 @@ public class SensorData
 
     public string ToJson()
     {
-        return JsonUtility.ToJson(times);
+        return JsonUtility.ToJson(this);
     }
 
     // デバック用
@@ -33,7 +33,7 @@ public class SensorData
     public string ToString()
     {
         var stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("SensorDataReceived");
+        stringBuilder.AppendLine("SensorData");
         stringBuilder.AppendLine($"name = {this.name}");
         stringBuilder.AppendLine("datas = [");
         for (int i=0; i<this.datas.Count; i++)
