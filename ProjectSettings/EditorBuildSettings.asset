@@ -4,7 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Co2SensorScene.unity
+    guid: a303b14d966b0984cbbbeacf037514f5
+  - enabled: 1
+    path: Assets/Scenes/GsrSensorScene.unity
+    guid: e57f198204d63456a9897cce3aa6aa8e
+  - enabled: 1
+    path: Assets/Scenes/UdSensorScene.unity
+    guid: 0d6d0d8bc37844773888a4182d6250d7
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 82ee0327b3d5eef459e904d435ebfe4c, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: fca65a273d6f1ed4d9c321d2089ecc76, type: 2}
