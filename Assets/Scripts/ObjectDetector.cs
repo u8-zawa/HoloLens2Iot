@@ -3,11 +3,13 @@ using Microsoft.MixedReality.Toolkit.UI;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Windows.WebCam;
 
 public class ObjectDetector : MonoBehaviour
 {
@@ -21,12 +23,27 @@ public class ObjectDetector : MonoBehaviour
     private CustomVisionResult customVisionResult;
     private List<GameObject> createdLabels = new List<GameObject>();
 
-    async void Start()
+    private PhotoCapture photoCapture;
+    private Resolution cameraResolution;
+
+    void Start()
     {
+        cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending(res => res.width * res.height).First();
+    }
+
+    // カメラで撮影した画像で推論を開始する
+    public async void StartDetect()
+    {
+        // Labelを削除
+        ClearLabels();
+
+        TakePicture();
+        await Task.Delay(3000);
+
         var image = imageObject.GetComponent<Image>();
         var imageData = image.sprite.texture.EncodeToJPG(); // textureとした画像(.jpg)をbyte配列に変換
 
-        customVisionResult = await DetectImageAsync(imageData, 0.8);
+        customVisionResult = await DetectImageAsync(imageData, 0.5);
 
         // Predictionsの先頭をログに出力
         Debug.Log(customVisionResult.ToString());
@@ -41,9 +58,43 @@ public class ObjectDetector : MonoBehaviour
         }
     }
 
-    void Update()
+    // 写真を撮る
+    private void TakePicture()
     {
-        
+        PhotoCapture.CreateAsync(false, delegate (PhotoCapture captureObject)
+        {
+            photoCapture = captureObject;
+            CameraParameters cameraParameters = new CameraParameters
+            {
+                hologramOpacity = 0.0f,
+                cameraResolutionWidth = cameraResolution.width,
+                cameraResolutionHeight = cameraResolution.height,
+                pixelFormat = CapturePixelFormat.BGRA32
+            };
+
+            photoCapture.StartPhotoModeAsync(cameraParameters, p =>
+            {
+                photoCapture.TakePhotoAsync(OnCapturedPhotoToMemory);
+            });
+        });
+
+    }
+
+    // imageObjectに撮った写真を書き込む
+    private void OnCapturedPhotoToMemory(PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
+    {
+        var targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
+        photoCaptureFrame.UploadImageDataToTexture(targetTexture);
+        imageObject.GetComponent<Image>().sprite = Sprite.Create(targetTexture, new Rect(0, 0, targetTexture.width, targetTexture.height), new Vector2(0.5f, 0.5f));
+
+        photoCapture.StopPhotoModeAsync(OnStoppedPhotoMode);
+    }
+
+    // PhotoModeを終了する
+    void OnStoppedPhotoMode(PhotoCapture.PhotoCaptureResult result)
+    {
+        photoCapture.Dispose();
+        photoCapture = null;
     }
 
     // imageDataから物体検出をする
@@ -94,5 +145,15 @@ public class ObjectDetector : MonoBehaviour
         var connector = toolTip.GetComponent<ToolTipConnector>();
         connector.Target = imageObject;
         createdLabels.Add(newLabel);
+    }
+
+    // Labelを削除する
+    private void ClearLabels()
+    {
+        foreach (var label in createdLabels)
+        {
+            Destroy(label);
+        }
+        createdLabels.Clear();
     }
 }
