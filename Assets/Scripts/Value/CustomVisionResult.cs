@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +17,12 @@ namespace CustomVision.Value
 
         public List<Prediction> Predictions { get; set; }
 
-        // ƒfƒoƒbƒN—p
+        public static CustomVisionResult FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<CustomVisionResult>(json);
+        }
+
+        // ï¿½fï¿½oï¿½bï¿½Nï¿½p
         override
         public string ToString()
         {

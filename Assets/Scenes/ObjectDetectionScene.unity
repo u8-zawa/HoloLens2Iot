@@ -176,6 +176,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1138097587}
   - component: {fileID: 1138097588}
+  - component: {fileID: 1138097590}
+  - component: {fileID: 1138097589}
+  - component: {fileID: 1138097591}
   m_Layer: 0
   m_Name: ObjectDetector
   m_TagString: Untagged
@@ -195,7 +198,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1673711971}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -214,12 +217,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b916580ead7e344b6d4735056701ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageObject: {fileID: 1217724193}
-  labelObject: {fileID: 5603237416908421393, guid: 3a24416f95e833b43812e1f4da548eb7, type: 3}
-  predictionKey: 
-  resourceBaseEndpoint: 
+  customVisionService: {fileID: 1138097590}
+  cameraCapture: {fileID: 1138097589}
+  objectLabeler: {fileID: 1138097591}
+  threshold: 0.5
+  delaySeconds: 3
+--- !u!114 &1138097589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138097586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab44cf357b77d0478ef5c634557e6e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageObject: {fileID: 1217724194}
+  image: 
+--- !u!114 &1138097590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138097586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d95916320b29bc4a9cb101773b4bfc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endpoint: 
   projectId: 
-  publishedName: Sensor Detection
+  projectName: 
+  predictionKey: 
+--- !u!114 &1138097591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138097586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b46a1b35b8174474088a1b829d7eed18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  labelObject: {fileID: 5603237416908421393, guid: 3a24416f95e833b43812e1f4da548eb7, type: 3}
 --- !u!1 &1217724193
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,8 +670,8 @@ Transform:
   m_Children:
   - {fileID: 1677096327}
   - {fileID: 1294659881}
-  - {fileID: 1138097587}
   - {fileID: 1806959878}
+  - {fileID: 1138097587}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -727,7 +772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3639298347101047738, guid: 01278414be879b54a8a7a8440a6a8adb, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3639298347101047738, guid: 01278414be879b54a8a7a8440a6a8adb, type: 3}
       propertyPath: m_AnchorMax.x
