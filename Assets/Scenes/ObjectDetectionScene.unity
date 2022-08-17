@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageObject: {fileID: 1217724194}
+  sampleTexture: {fileID: 0}
   image: 
 --- !u!114 &1138097590
 MonoBehaviour:

@@ -9,6 +9,9 @@ public class CameraCapture : MonoBehaviour
     [SerializeField]
     private Image imageObject; // 撮影した写真を表示させる用のオブジェクト
 
+    [SerializeField]
+    private Texture2D sampleTexture; // 撮影する写真の代わりとするテクスチャ
+
     [HideInInspector]
     public byte[] image; // 撮影した写真のbyte配列
 
@@ -16,7 +19,24 @@ public class CameraCapture : MonoBehaviour
 
     public void StartPhotoCapture()
     {
-        PhotoCapture.CreateAsync(false, OnPhotoCaptureCreated);
+        // sampleTextureがnullだったら、撮影する
+        if (sampleTexture == null)
+        {
+            PhotoCapture.CreateAsync(false, OnPhotoCaptureCreated);
+        }
+        else
+        {
+            var sprite = Sprite.Create(sampleTexture, new Rect(0, 0, sampleTexture.width, sampleTexture.height), new Vector2(0.5f, 0.5f));
+
+            // imageObjectが設定されていたら、指定した写真を表示させる
+            if (imageObject != null)
+            {
+                imageObject.sprite = sprite;
+            }
+
+            // 指定した写真のbyte配列を代入する
+            image = sprite.texture.EncodeToJPG();
+        }
     }
 
     private void OnPhotoCaptureCreated(PhotoCapture captureObject)
