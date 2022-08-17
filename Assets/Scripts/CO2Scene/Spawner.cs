@@ -7,6 +7,9 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject prefab; // 生成するオブジェクト（Prefab）
     [SerializeField] private int MinNum = 3;    // オブジェクトの最小生成数
     [SerializeField] private int MaxNum = 30;   // オブジェクトの最大生成数
+
+    [SerializeField] private int MinValue = 300;     // オブジェクトの数が最小となるときのセンサー測定値
+    [SerializeField] private int MaxValue = 2000;    // オブジェクトの数が最大となるときのセンサー測定値
     public int nowNum = 0;                      // 現在のオブジェクトの設定数
 
     private List<GameObject> objects = new List<GameObject>();  // 管理しているオブジェクトのリスト
@@ -29,6 +32,20 @@ public class Spawner : MonoBehaviour
         {
             Add(nowNum - Num);
         }
+    }
+
+    // センサーの個数をセンサー情報から更新する
+    public void UpdateNowNum()
+    {
+        // センサーの測定値を取得
+        SensorDataManager sdm = SensorDataManager.Instance;
+        if (sdm == null || sdm.GetSensorData("CO2") == null)
+        {
+            return;
+        }
+        int nowValue = sdm.GetSensorData("CO2").stat.latest;
+        // 現在の個数を計算
+        nowNum = (int)Mathf.Round(MinNum + (float)(MaxNum - MinNum) * (nowValue - MinValue) / (MaxValue - MinValue));
     }
 
     // 数を指定して、その分オブジェクトを増やす
