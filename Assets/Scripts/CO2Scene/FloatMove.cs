@@ -23,12 +23,14 @@ public class FloatMove : MonoBehaviour
 
     private Rigidbody _rb;  // Rigidbodyのキャッシュ
     private Vector3 _homePosition;  // 生成時の位置の記憶
+    private Vector3 _originalScale; // 生成時のスケールの記憶
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _homePosition = transform.position;
+        _originalScale = transform.localScale;
         // Start()と同時に移動を開始する
         StartCoroutine(Floating());
     }
@@ -107,6 +109,8 @@ public class FloatMove : MonoBehaviour
     public void endGrab()
     {
         isGrabbed = false;
+        // 大きさを元に戻す
+        transform.localScale = _originalScale;
         // 箱の外にあるときは、初期位置に移動する
         if (isOutOfBox)
         {
