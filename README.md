@@ -3,6 +3,7 @@
 ### バージョン
 
 - Unity 2020.3.36f1
+- Visual Studio 2019
 - Microsoft.MixedReality.Toolkit.Unity.Examples.2.8.2.unitypackage
 
 ### メンバー
@@ -12,3 +13,4 @@
 - b2202560
 - sakucha
 - TbrtTkyk
+- tsune2201630
