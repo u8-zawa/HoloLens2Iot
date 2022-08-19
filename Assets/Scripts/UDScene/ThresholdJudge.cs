@@ -7,12 +7,7 @@ public class ThresholdJudge : MonoBehaviour
     [SerializeField] private int threshold = 200;    // 閾値 (単位:cm)
     public int nowValue = 0;    //　現在の超音波距離センサーの測定値
     public bool IsOver { get; private set; }    // 現在のセンサーの測定値が閾値以上か以下かのフラグ
-    
-    private void Update()
-    {
-        Judge();
-    }
-    
+
     // センサーの測定値と閾値の大小判定
     public void Judge()
     {   
