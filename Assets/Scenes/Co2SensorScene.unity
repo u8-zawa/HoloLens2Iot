@@ -1763,7 +1763,7 @@ RectTransform:
   m_Children:
   - {fileID: 306824071}
   m_Father: {fileID: 1814607059}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -7415,6 +7415,7 @@ GameObject:
   - component: {fileID: 1814607059}
   - component: {fileID: 1814607061}
   - component: {fileID: 1814607060}
+  - component: {fileID: 1814607062}
   m_Layer: 5
   m_Name: LineChart
   m_TagString: Untagged
@@ -7450,8 +7451,8 @@ RectTransform:
   - {fileID: 1035588295}
   - {fileID: 464956244}
   - {fileID: 1729674800}
-  - {fileID: 285055970}
   - {fileID: 2072946192}
+  - {fileID: 285055970}
   m_Father: {fileID: 271208938}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8773,6 +8774,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814607058}
   m_CullTransparentMesh: 1
+--- !u!114 &1814607062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814607058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7540eef65badc846855a8213ebf8403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: "CO2\u6FC3\u5EA6"
+  maxValue: 3000
+  minValue: 300
+  setXValue: 1
 --- !u!1 &1815547181
 GameObject:
   m_ObjectHideFlags: 0
@@ -9878,7 +9895,7 @@ RectTransform:
   - {fileID: 1123320836}
   - {fileID: 3640796}
   m_Father: {fileID: 1814607059}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
