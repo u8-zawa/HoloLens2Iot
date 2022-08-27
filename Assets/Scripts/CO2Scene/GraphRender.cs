@@ -76,6 +76,18 @@ public class GraphRender : MonoBehaviour
         }
     }
 
+    // センサーの取得情報に従ってグラフを更新する
+    public void UpdateSensorValue(string sensorName)
+    {
+        SensorDataManager sdm = SensorDataManager.Instance;
+        SensorData sensorData;
+        if( sdm == null || (sensorData = sdm.GetSensorData(sensorName)) == null )
+        {
+            return;
+        }
+        UpdateDataXY(sensorData.times, sensorData.datas);
+    }
+
     // Y軸のデータを更新する（X軸方向は横に一定間隔に並ぶ）
     void UpdateYData(List<int> datas)
     {
