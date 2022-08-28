@@ -27,6 +27,7 @@ public class GraphRender : MonoBehaviour
         {
             serie = chart.AddSerie<Serie>();
         }
+        serie.ClearData();
 
         // ƒ^ƒCƒgƒ‹‚ğİ’è
         Title title = chart.GetChartComponent<Title>();
@@ -43,6 +44,7 @@ public class GraphRender : MonoBehaviour
         if( setXValue )
         {
             xAxis.type = Axis.AxisType.Value;
+            xAxis.minMaxType = Axis.AxisMinMaxType.MinMax;
         }
         else
         {
