@@ -12,6 +12,7 @@ public class SensorDataManager : SingletonMonoBehaviorInScene<SensorDataManager>
     // センサー情報の更新
     public void UpdateData(SensorData data)
     {
+        if (data == null || data.name == null) return;
         datas[data.name] = data;
         Debug.Log("SaveData:" + data.ToString());
 
