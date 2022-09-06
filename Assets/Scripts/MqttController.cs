@@ -114,11 +114,11 @@ public class MqttController : MonoBehaviour
  
                 // GameObjectなどで描画するならこの中に処理を書く UWP の場合
                 
-                // payloadが設定されていて、中身がJsonの場合
-                if (payload != "" && IsJson(payload))
+                // payloadが設定されていて、中身がSensorData形式のJsonの場合
+                if (payload != "" && SensorData.IsSensorDataJson(payload))
                 {
                     sensorData = SensorData.FromJson(payload);
-                    Debug.Log(sensorData.ToString());
+                    Debug.Log(sensorData.ToJson());
 
                     MemorySensorData(sensorData);
                 }
@@ -138,11 +138,11 @@ public class MqttController : MonoBehaviour
 
                 // GameObjectなどで描画するならこの中に処理を書く
 
-                // payloadが設定されていて、中身がJsonの場合
-                if (payload != "" && IsJson(payload))
+                // payloadが設定されていて、中身がSensorData形式のJsonの場合
+                if (payload != "" && SensorData.IsSensorDataJson(payload))
                 {
                     sensorData = SensorData.FromJson(payload);
-                    Debug.Log(sensorData.ToString());
+                    Debug.Log(sensorData.ToJson());
 
                     MemorySensorData(sensorData);
                 }
@@ -163,18 +163,6 @@ public class MqttController : MonoBehaviour
         Task.Run(async () => {
             await mqttClient.PublishAsync(message);
         });
-    }
-
-    private Boolean IsJson(string data)
-    {
-        try
-        {
-            JsonUtility.FromJson<SensorData>(data);
-        } catch 
-        {
-            return false;
-        }
-        return true;
     }
 
     // SensorDataManagerが存在していれば、SensorDataを格納して保存する

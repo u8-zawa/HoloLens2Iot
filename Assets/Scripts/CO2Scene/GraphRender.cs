@@ -87,7 +87,7 @@ public class GraphRender : MonoBehaviour
         {
             return;
         }
-        UpdateDataXY(sensorData.times, sensorData.datas);
+        UpdateDataXY(sensorData.Times, sensorData.Datas);
     }
 
     // Y軸のデータを更新する（X軸方向は横に一定間隔に並ぶ）

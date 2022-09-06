@@ -1,26 +1,10 @@
-using System;
-using System.Text;
-
-[Serializable]
 public class Statistics
 {
-    public int latest;
-    public float avg;
-    public int max;
-    public int min;
+    public int Latest { get; set; }
 
-    // デバック用
-    override
-    public string ToString()
-    {
-        var stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("stat = {");
-        stringBuilder.AppendLine($"  latest = {this.latest}");
-        stringBuilder.AppendLine($"  avg = {this.avg}");
-        stringBuilder.AppendLine($"  max = {this.max}");
-        stringBuilder.AppendLine($"  min = {this.min}");
-        stringBuilder.AppendLine("}");
+    public float Avg { get; set; }
 
-        return stringBuilder.ToString();
-    }
+    public int Max { get; set; }
+
+    public int Min { get; set; }
 }
