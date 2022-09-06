@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ThresholdJudge : MonoBehaviour
@@ -19,7 +17,7 @@ public class ThresholdJudge : MonoBehaviour
         }
 
         // 現在のセンサーの測定値
-        int nowValue = sdm.GetSensorData("ud").stat.latest;
+        int nowValue = sdm.GetSensorData("ud").Stat.Latest;
         
         // 現在のセンサーの測定値と閾値の大小を比較
         if (nowValue < threshold) {

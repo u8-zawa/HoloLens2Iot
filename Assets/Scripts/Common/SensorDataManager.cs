@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,8 +11,9 @@ public class SensorDataManager : SingletonMonoBehaviorInScene<SensorDataManager>
     // センサー情報の更新
     public void UpdateData(SensorData data)
     {
-        datas[data.name] = data;
-        Debug.Log("SaveData:" + data.ToString());
+        if (data == null || data.Name == null) return;
+        datas[data.Name] = data;
+        Debug.Log("SaveData:" + data.ToJson());
 
         // データを更新した際の処理を実行する
         OnUpdateDataEvent.Invoke();

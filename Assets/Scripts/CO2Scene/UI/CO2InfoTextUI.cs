@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -28,9 +26,9 @@ public class CO2InfoTextUI : MonoBehaviour
         // ’l‚ÌŽæ“¾
         bool flag = false;
         SensorData sensorData = SensorDataManager.Instance.GetSensorData("CO2");
-        if (sensorData != null && sensorData.stat.latest != CO2Value)
+        if (sensorData != null && sensorData.Stat.Latest != CO2Value)
         {
-            CO2Value = sensorData.stat.latest;
+            CO2Value = sensorData.Stat.Latest;
             flag = true;
         }else if (sensorData == null)
         {

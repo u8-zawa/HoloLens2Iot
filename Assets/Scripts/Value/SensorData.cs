@@ -1,55 +1,45 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
-[Serializable]
 public class SensorData
 {
-    public string name;
-    public List<int> datas;
-    public List<long> times;
-    public Statistics stat;
+    public string Name { get; set; }
+
+    public List<int> Datas { get; set; }
+
+    public List<long> Times { get; set; }
+
+    public Statistics Stat { get; set; }
 
     public static SensorData FromJson(string json)
     {
-        SensorData sensorData = null;
-        try
+        var settings = new JsonSerializerSettings
         {
-            sensorData = JsonUtility.FromJson<SensorData>(json);
-        } catch (Exception e) {
-            Debug.Log(e.Message);
-        }
-        return sensorData;
+            // メンバが存在しない場合、例外を出力する(デシリアライズ時)
+            MissingMemberHandling = MissingMemberHandling.Error
+        };
+        return JsonConvert.DeserializeObject<SensorData>(json, settings);
     }
 
     public string ToJson()
     {
-        return JsonUtility.ToJson(this);
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
     }
 
-    // デバック用
-    override
-    public string ToString()
+    // 正しい形式のJsonであるかどうか
+    public static bool IsSensorDataJson(string json)
     {
-        var stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("SensorData");
-        stringBuilder.AppendLine($"name = {this.name}");
-        stringBuilder.AppendLine("datas = [");
-        for (int i=0; i<this.datas.Count; i++)
+        try
         {
-            stringBuilder.AppendLine($"  {this.datas[i]},");
+            FromJson(json);
         }
-        stringBuilder.AppendLine("]");
-        stringBuilder.AppendLine("times = [");
-        for (int i=0; i<this.times.Count; i++)
+        catch (Exception e)
         {
-            stringBuilder.AppendLine($"  {this.times[i]},");
+            Debug.Log(e.Message);
+            return false;
         }
-        stringBuilder.AppendLine("]");
-        stringBuilder.AppendLine(this.stat.ToString());
-
-        return stringBuilder.ToString();
-    }
-
+        return true;
+    } 
 }
