@@ -1454,7 +1454,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2113875699234556495, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_text
-      value: "<size=42><b>\u4E8C\u9178\u5316\u70AD\u7D20\u30BB\u30F3\u30B5\u30FC</b></size>\n\n\u4E8C\u9178\u5316\u70AD\u7D20\u30BB\u30F3\u30B5\u30FC\u304B\u53D6\u5F97\u3057\u305F\u5024\u306B\u5FDC\u3058\u3066\u3001\u4E8C\u9178\u5316\u70AD\u7D20\u5206\u5B50\u3092\u900F\u660E\u306A\u7BB1\u306E\u4E2D\u306B\u6F02\u308F\u305B\u305F\u308A\u3001\u30B0\u30E9\u30D5\u3092\u8868\u793A\u3055\u305B\u305F\u308A\u3059\u308B\u3002"
+      value: "<size=42><b>\u4E8C\u9178\u5316\u70AD\u7D20\u30BB\u30F3\u30B5\u30FC</b></size>\n\n<size=22>\u4E8C\u9178\u5316\u70AD\u7D20\u30BB\u30F3\u30B5\u30FC\u304C\u53D6\u5F97\u3057\u305F\u5024\u306B\u5FDC\u3058\u3066\u3001\u4E8C\u9178\u5316\u70AD\u7D20\u5206\u5B50\u3092\u900F\u660E\u306A\u7BB1\u306E\u4E2D\u306B\u6F02\u308F\u305B\u3066\u3044\u307E\u3059\u3002\n\u3053\u306E\u4E8C\u9178\u5316\u70AD\u7D20\u5206\u5B50\u306F\u63B4\u3093\u3067\u56DE\u8EE2\u3055\u305B\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059\u3002\n\u307E\u305F\u3001\u6E2C\u5B9A\u5024\u3092\u30B0\u30E9\u30D5\u306B\u3057\u3066\u8868\u793A\u3057\u3066\u3044\u307E\u3059\u3002\n\n\u73FE\u5728\u306E\u4E8C\u9178\u5316\u70AD\u7D20\u6FC3\u5EA6:
+        <b>30000ppm</b>\n\u4E8C\u9178\u5316\u70AD\u7D20\u5206\u5B50\u306E\u500B\u6570:
+        <b>5\u500B</b></size>"
       objectReference: {fileID: 0}
     - target: {fileID: 2113875699234556495, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_fontSize
@@ -1558,19 +1560,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7614231225992287547, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.7
+      value: 0.232
       objectReference: {fileID: 0}
     - target: {fileID: 7614231225992287547, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3
+      value: -0.179
       objectReference: {fileID: 0}
     - target: {fileID: 7614231225992287547, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0.585
       objectReference: {fileID: 0}
     - target: {fileID: 7614231225992287547, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.953717
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7614231225992287547, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1578,7 +1580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7614231225992287547, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.30070576
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7614231225992287547, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1590,7 +1592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7614231225992287547, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7614231225992287547, guid: 18470d71939382448be2ecd06efa9662, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1661,7 +1663,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271208937}
   m_LocalRotation: {x: 0, y: 0.2588191, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 1.518}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1814607059}
@@ -1670,7 +1672,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 30, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.2, y: 0}
+  m_AnchoredPosition: {x: 0.922, y: 0}
   m_SizeDelta: {x: 1.5, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &271208939
@@ -5723,8 +5725,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214873660}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 1664011844}
   - {fileID: 1001273412}
@@ -6098,8 +6100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 1598394725}
-  textFormat: "<size=42><b>\u4E8C\u9178\u5316\u70AD\u7D20\u30BB\u30F3\u30B5\u30FC</b></size>\n\n\u4E8C\u9178\u5316\u70AD\u7D20\u30BB\u30F3\u30B5\u30FC\u304B\u53D6\u5F97\u3057\u305F\u5024\u306B\u5FDC\u3058\u3066\u3001\u4E8C\u9178\u5316\u70AD\u7D20\u5206\u5B50\u3092\u900F\u660E\u306A\u7BB1\u306E\u4E2D\u306B\u6F02\u308F\u305B\u305F\u308A\u3001\u30B0\u30E9\u30D5\u3092\u8868\u793A\u3055\u305B\u305F\u308A\u3059\u308B\u3002\n\n\u73FE\u5728\u306E\u4E8C\u9178\u5316\u70AD\u7D20\u6FC3\u5EA6:
-    {0}\n\u4E8C\u9178\u5316\u70AD\u7D20\u5206\u5B50\u306E\u500B\u6570: {1}\u500B"
+  textFormat: "<size=42><b>\u4E8C\u9178\u5316\u70AD\u7D20\u30BB\u30F3\u30B5\u30FC</b></size>\n\n<size=22>\u4E8C\u9178\u5316\u70AD\u7D20\u30BB\u30F3\u30B5\u30FC\u304C\u53D6\u5F97\u3057\u305F\u5024\u306B\u5FDC\u3058\u3066\u3001\u4E8C\u9178\u5316\u70AD\u7D20\u5206\u5B50\u3092\u900F\u660E\u306A\u7BB1\u306E\u4E2D\u306B\u6F02\u308F\u305B\u3066\u3044\u307E\u3059\u3002\n\u3053\u306E\u4E8C\u9178\u5316\u70AD\u7D20\u5206\u5B50\u306F\u63B4\u3093\u3067\u56DE\u8EE2\u3055\u305B\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059\u3002\n\u307E\u305F\u3001\u6E2C\u5B9A\u5024\u3092\u30B0\u30E9\u30D5\u306B\u3057\u3066\u8868\u793A\u3057\u3066\u3044\u307E\u3059\u3002\n\n\u73FE\u5728\u306E\u4E8C\u9178\u5316\u70AD\u7D20\u6FC3\u5EA6:
+    <b>{0}ppm</b>\n\u4E8C\u9178\u5316\u70AD\u7D20\u5206\u5B50\u306E\u500B\u6570:
+    <b>{1}\u500B</b></size>"
 --- !u!1 &1449611644
 GameObject:
   m_ObjectHideFlags: 1
@@ -8798,7 +8801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7540eef65badc846855a8213ebf8403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "CO2\u6FC3\u5EA6"
+  title: "\u4E8C\u9178\u5316\u70AD\u7D20\u6FC3\u5EA6\u306E\u63A8\u79FB"
   maxValue: 3000
   minValue: 300
   setXValue: 1

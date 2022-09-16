@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class GraphRender : MonoBehaviour
 
     private LineChart chart;
     private Serie serie;
+
+    private long FromTicks;
 
     // Start is called before the first frame update
     void Start()
@@ -43,13 +46,21 @@ public class GraphRender : MonoBehaviour
         XAxis xAxis = chart.GetChartComponent<XAxis>();
         if( setXValue )
         {
-            xAxis.type = Axis.AxisType.Value;
+            xAxis.type = Axis.AxisType.Category;
             xAxis.minMaxType = Axis.AxisMinMaxType.MinMax;
         }
         else
         {
             xAxis.type = Axis.AxisType.Category;
         }
+        // 文字列の設定
+        xAxis.axisLabel.textLimit.enable = false;
+        xAxis.axisLabel.textStyle.fontSize = 15;
+        xAxis.axisLabel.textPadding.top = 4;
+
+        // 基準となる1970年1月1日のタイマ刻み秒を取得
+        DateTime dt = new DateTime(1970, 1, 1);
+        FromTicks = dt.Ticks;
     }
 
     // 5秒毎にランダムな値にグラフを更新してデバッグする
@@ -65,12 +76,12 @@ public class GraphRender : MonoBehaviour
         List<int> datas = new List<int>();
         for(int i = 0; i < 5; i++)
         {
-            datas.Add(Random.Range(600, 700));
+            datas.Add(UnityEngine.Random.Range(600, 700));
         }
         WaitForSeconds wait = new WaitForSeconds(5);
         while (true)
         {
-            datas.Add(Random.Range(600, 700));
+            datas.Add(UnityEngine.Random.Range(600, 700));
             datas.RemoveAt(0);
             UpdateDataXY(datax, datas);
             //UpdateData(datas);
@@ -87,7 +98,8 @@ public class GraphRender : MonoBehaviour
         {
             return;
         }
-        UpdateDataXY(sensorData.Times, sensorData.Datas);
+        UpdateYDataWithName(sensorData.Times, sensorData.Datas);
+ //       UpdateDataXY(sensorData.Times, sensorData.Datas);
     }
 
     // Y軸のデータを更新する（X軸方向は横に一定間隔に並ぶ）
@@ -103,6 +115,21 @@ public class GraphRender : MonoBehaviour
         }
     }
 
+    // 名前と共にY軸のデータを更新する（X軸方向は横に一定間隔で並ぶ）
+    void UpdateYDataWithName(List<long> times, List<int> datas)
+    {
+        serie.ClearData();
+        XAxis xAxis = chart.GetChartComponent<XAxis>();
+        xAxis.ClearData();
+
+        for (int i = 0; i < datas.Count; i++)
+        {
+            chart.AddXAxisData(ToTimeString(times[i]));
+            chart.AddData(0, datas[i]);
+            //chart.AddData(0, datas[i], ToTimeString(times[i]));
+        }
+    }
+
     // X軸Y軸セットのデータを更新する
     void UpdateDataXY(List<long> dataX, List<int> dataY)
     {
@@ -111,6 +138,14 @@ public class GraphRender : MonoBehaviour
         for (int i = 0; i < dataX.Count; i++)
         {
             serie.AddXYData(dataX[i], dataY[i]);
+            Debug.Log("日付：" + ToTimeString(dataX[i]));
         }
+    }
+
+    // Jsonate式でのミリ秒（1970年1月1日からの経過ミリ秒）を時間に直す
+    private string ToTimeString(long milliSec)
+    {
+        DateTime dt = new DateTime(FromTicks + milliSec * TimeSpan.TicksPerMillisecond).ToLocalTime();
+        return dt.ToString("MM/dd\nHH:mm:ss");
     }
 }
