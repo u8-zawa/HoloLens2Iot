@@ -6,6 +6,7 @@ public class ThresholdJudge : MonoBehaviour
     public int nowValue = 0;    //　現在の超音波距離センサーの測定値
     public bool IsOver { get; private set; }    // 現在のセンサーの測定値が閾値以上か以下かのフラグ
 
+    
     // センサーの測定値と閾値の大小判定
     public void Judge()
     {   
@@ -22,12 +23,13 @@ public class ThresholdJudge : MonoBehaviour
         // 現在のセンサーの測定値と閾値の大小を比較
         if (nowValue < threshold) {
             IsOver = false;
-            Debug.Log("less than 2m");
+            // Debug.Log("less than 2m");
         }
         else {
             IsOver = true;
-            Debug.Log("greater than 2m");
+            // Debug.Log("greater than 2m");
         }
     }
 }
+
         
