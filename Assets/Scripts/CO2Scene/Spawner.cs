@@ -42,7 +42,7 @@ public class Spawner : MonoBehaviour
         {
             return;
         }
-        int nowValue = sdm.GetSensorData("CO2").Stat.Latest;
+        float nowValue = sdm.GetSensorData("CO2").Stat.Latest;
         // Œ»İ‚ÌŒÂ”‚ğŒvZ
         nowNum = (int)Mathf.Round(MinNum + (float)(MaxNum - MinNum) * (nowValue - MinValue) / (MaxValue - MinValue));
     }

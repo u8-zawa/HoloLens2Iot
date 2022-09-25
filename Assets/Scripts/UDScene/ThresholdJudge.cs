@@ -18,7 +18,7 @@ public class ThresholdJudge : MonoBehaviour
         }
 
         // 現在のセンサーの測定値
-        int nowValue = sdm.GetSensorData("ud").Stat.Latest;
+        float nowValue = sdm.GetSensorData("ud").Stat.Latest;
         
         // 現在のセンサーの測定値と閾値の大小を比較
         if (nowValue < threshold) {
