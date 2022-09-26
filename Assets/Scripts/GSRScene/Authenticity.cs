@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class Authenticity : MonoBehaviour
 {
     public GameObject angelStatue;
+    private GameObject _demonStatueObject;
+    private ParticleSystem _lightEffectObject;
+    private ParticleSystem _bombEffectObject;
 
     public ParticleSystem lightParticle;
     public ParticleSystem bombParticle;
@@ -23,10 +26,17 @@ public class Authenticity : MonoBehaviour
 
     private float gsrBeforValue = 0.0F;
     private float gsrAfterValue = 0.0F;
-    private float gsrValue = 0.0F; 
+    private float gsrValue = 0.0F;
+
+    [SerializeField] private float voltLimit = 0.01f;
 
     public void OnTouchButton()
     {
+        angelStatue.SetActive(true);
+        if (_demonStatueObject != null) Destroy(_demonStatueObject);
+        if (_lightEffectObject != null) Destroy(_lightEffectObject);
+        if (_bombEffectObject != null) Destroy(_bombEffectObject);
+
         gsrBeforValue = GetGsrLatest();
 
         audioSource.PlayOneShot(sound1);
@@ -36,10 +46,10 @@ public class Authenticity : MonoBehaviour
 
     public void Judge()
     {
-        ParticleSystem light = Instantiate(lightParticle);
-        light.transform.position = angelStatue.transform.position;
-        ParticleSystem bomb = Instantiate(bombParticle);
-        bomb.transform.position = angelStatue.transform.position;
+        _lightEffectObject = Instantiate(lightParticle);
+        _lightEffectObject.transform.position = angelStatue.transform.position;
+        _bombEffectObject = Instantiate(bombParticle);
+        _bombEffectObject.transform.position = angelStatue.transform.position;
 
         audioSource.Stop();
         gsrAfterValue = GetGsrLatest();
@@ -56,27 +66,28 @@ public class Authenticity : MonoBehaviour
         {
             audioSource.PlayOneShot(sound2);
             text.gameObject.GetComponent<TextMesh>().text = "HONEST";
-            light.Play();
+            _lightEffectObject.Play();
         }
 
         //???s?p?^?[??
         else if (i)
         {
             audioSource.PlayOneShot(sound3);
-            Destroy(angelStatue);
-            Instantiate(demonStatue, new Vector3(angelStatue.transform.position.x, 
+            //Destroy(angelStatue);
+            angelStatue.SetActive(false);
+            _demonStatueObject = Instantiate(demonStatue, new Vector3(angelStatue.transform.position.x, 
                 angelStatue.transform.position.y + 0.30F, angelStatue.transform.position.z + 0.1F), 
                 Quaternion.Euler(angelStatue.transform.rotation.x, angelStatue.transform.rotation.y - 180,
                 angelStatue.transform.rotation.z));
             text.gameObject.GetComponent<TextMesh>().text = "LIAR";
-            bomb.Play();
+            _bombEffectObject.Play();
         }
     }
 
     //?f?[?^??
     public SensorData GetGsrData()
     {
-        SensorData sensorData = SensorDataManager.Instance.GetSensorData("");
+        SensorData sensorData = SensorDataManager.Instance.GetSensorData("gsr");
         if(sensorData != null)
         {
             return sensorData;
@@ -101,6 +112,6 @@ public class Authenticity : MonoBehaviour
     {
         SensorData gsrData = GetGsrData();
         if (gsrData == null) return false;
-        return gsrData.Stat.Max - gsrData.Stat.Latest > 0.04;
+        return gsrData.Stat.Max - gsrData.Stat.Min > voltLimit;
     }
 }
