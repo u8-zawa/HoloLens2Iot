@@ -27,7 +27,7 @@ public class Authenticity : MonoBehaviour
 
     public void OnTouchButton()
     {
-        gsrBeforValue = GetGsrData();
+        gsrBeforValue = GetGsrLatest();
 
         audioSource.PlayOneShot(sound1);
 
@@ -42,25 +42,25 @@ public class Authenticity : MonoBehaviour
         bomb.transform.position = angelStatue.transform.position;
 
         audioSource.Stop();
-        gsrAfterValue = GetGsrData();
+        gsrAfterValue = GetGsrLatest();
 
         gsrValue = gsrBeforValue - gsrAfterValue;
         Debug.Log(gsrBeforValue);
         Debug.Log(gsrAfterValue);
-        //gsrValue > 0.04で成功
+        //gsrValue > 0.04??????
 
-        //if分岐は仮
-        int i = 1;
-        //成功パターン
-        if (i == 0)
+        //if????????
+        bool i = CompareMaxAndLatest();
+        //?????p?^?[??
+        if (!i)
         {
             audioSource.PlayOneShot(sound2);
             text.gameObject.GetComponent<TextMesh>().text = "HONEST";
             light.Play();
         }
 
-        //失敗パターン
-        else if (i == 1)
+        //???s?p?^?[??
+        else if (i)
         {
             audioSource.PlayOneShot(sound3);
             Destroy(angelStatue);
@@ -73,21 +73,34 @@ public class Authenticity : MonoBehaviour
         }
     }
 
-    //データ仮
-    public float GetGsrData()
+    //?f?[?^??
+    public SensorData GetGsrData()
     {
-        //SensorData sensorData = SensorDataManager.Instance.GetSensorData("");
-        //if(sensorData != null)
-        //{
-        //    float gsrValue = sensorData.stat.latest;
-        //    return gsrValue;
-        //}
-        //else
-        //{
-        //   return 0.0F;
-        //}
+        SensorData sensorData = SensorDataManager.Instance.GetSensorData("");
+        if(sensorData != null)
+        {
+            return sensorData;
+        }
+        else
+        {
+           return null;
+        }
 
-        //仮
-        return 0.0F;
+        //??
+        //return 0.0F;
+
+    }
+
+    public float GetGsrLatest()
+    {
+        var data = GetGsrData();
+        return data != null ? data.Stat.Latest : 0f;
+    }
+
+    public bool CompareMaxAndLatest()
+    {
+        SensorData gsrData = GetGsrData();
+        if (gsrData == null) return false;
+        return gsrData.Stat.Max - gsrData.Stat.Latest > 0.04;
     }
 }
