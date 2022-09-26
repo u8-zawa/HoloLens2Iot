@@ -10,7 +10,7 @@ public class CO2InfoTextUI : MonoBehaviour
     [SerializeField, TextArea(3, 5)] private string textFormat = "“ñ_‰»’Y‘f”Z“xF{0}A“ñ_‰»’Y‘fŒÂ”F{1}";
 
     private int CO2ModelN = 0;
-    private int CO2Value = 0;
+    private float CO2Value = 0;
 
     // Start is called before the first frame update
     void Start()

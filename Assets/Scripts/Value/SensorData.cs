@@ -7,7 +7,7 @@ public class SensorData
 {
     public string Name { get; set; }
 
-    public List<int> Datas { get; set; }
+    public List<float> Datas { get; set; }
 
     public List<long> Times { get; set; }
 

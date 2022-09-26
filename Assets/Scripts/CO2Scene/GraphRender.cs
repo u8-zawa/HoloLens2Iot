@@ -116,7 +116,7 @@ public class GraphRender : MonoBehaviour
     }
 
     // 名前と共にY軸のデータを更新する（X軸方向は横に一定間隔で並ぶ）
-    void UpdateYDataWithName(List<long> times, List<int> datas)
+    void UpdateYDataWithName(List<long> times, List<float> datas)
     {
         serie.ClearData();
         XAxis xAxis = chart.GetChartComponent<XAxis>();
