@@ -8,9 +8,14 @@ using XCharts.Runtime;
 public class GraphRender : MonoBehaviour
 {
     [SerializeField] private string title = "CO2濃度";
-    [SerializeField] private int maxValue = 3000;
-    [SerializeField] private int minValue = 300;
+    [SerializeField] private float maxValue = 3000;
+    [SerializeField] private float minValue = 300;
     [SerializeField] private bool setXValue = true;
+
+    [SerializeField] private bool setYAxisName = false;
+    [SerializeField] private Vector3 YAxisNameOffset = Vector3.up * 20f;
+    [SerializeField] private string YAxisName = "電圧(V)";
+    [SerializeField] private string NumericFormatter = "0.00";
 
     private LineChart chart;
     private Serie serie;
@@ -41,6 +46,14 @@ public class GraphRender : MonoBehaviour
         axis.minMaxType = Axis.AxisMinMaxType.Custom;
         axis.min = minValue;
         axis.max = maxValue;
+        // Y軸の名前を設定
+        if(setYAxisName)
+        {
+            axis.axisName.show = true;
+            axis.axisName.labelStyle.offset = YAxisNameOffset;
+            axis.axisLabel.numericFormatter = NumericFormatter;
+            axis.axisName.name = YAxisName;
+        }
 
         // X軸のタイプを値に変更
         XAxis xAxis = chart.GetChartComponent<XAxis>();
@@ -73,7 +86,7 @@ public class GraphRender : MonoBehaviour
     private IEnumerator UpdateRandomValue()
     {
         List<long> datax = new List<long>() { 0, 1, 2, 3, 5};
-        List<int> datas = new List<int>();
+        List<float> datas = new List<float>();
         for(int i = 0; i < 5; i++)
         {
             datas.Add(UnityEngine.Random.Range(600, 700));
@@ -103,7 +116,7 @@ public class GraphRender : MonoBehaviour
     }
 
     // Y軸のデータを更新する（X軸方向は横に一定間隔に並ぶ）
-    void UpdateYData(List<int> datas)
+    void UpdateYData(List<float> datas)
     {
         serie.ClearData();
 
@@ -131,7 +144,7 @@ public class GraphRender : MonoBehaviour
     }
 
     // X軸Y軸セットのデータを更新する
-    void UpdateDataXY(List<long> dataX, List<int> dataY)
+    void UpdateDataXY(List<long> dataX, List<float> dataY)
     {
         serie.ClearData();
 
