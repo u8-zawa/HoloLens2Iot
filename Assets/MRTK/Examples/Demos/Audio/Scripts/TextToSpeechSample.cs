@@ -10,6 +10,7 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos
     /// Sample script for text to speech
     /// </summary>
     [RequireComponent(typeof(TextToSpeech))]
+
     public class TextToSpeechSample : MonoBehaviour
     {
         private TextToSpeech textToSpeech;
