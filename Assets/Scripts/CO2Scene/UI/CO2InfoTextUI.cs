@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -12,7 +10,7 @@ public class CO2InfoTextUI : MonoBehaviour
     [SerializeField, TextArea(3, 5)] private string textFormat = "“ñ_‰»’Y‘f”Z“xF{0}A“ñ_‰»’Y‘fŒÂ”F{1}";
 
     private int CO2ModelN = 0;
-    private int CO2Value = 0;
+    private float CO2Value = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -28,9 +26,9 @@ public class CO2InfoTextUI : MonoBehaviour
         // ’l‚Ìæ“¾
         bool flag = false;
         SensorData sensorData = SensorDataManager.Instance.GetSensorData("CO2");
-        if (sensorData != null && sensorData.stat.latest != CO2Value)
+        if (sensorData != null && sensorData.Stat.Latest != CO2Value)
         {
-            CO2Value = sensorData.stat.latest;
+            CO2Value = sensorData.Stat.Latest;
             flag = true;
         }else if (sensorData == null)
         {
