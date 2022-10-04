@@ -15,7 +15,7 @@
 
 ### メインメニューを開く
 
-- Node-REDを起動したら、`http://localhost:1800`を指定することで、Node-REDエディタにアクセスできます。
+- Node-REDを起動したら、`http://localhost:1880`を指定することで、Node-REDエディタにアクセスできます。
 
   ![説明用画像](img/Image01.png)
 
