@@ -57,11 +57,11 @@ public class Authenticity : MonoBehaviour
         gsrValue = gsrBeforValue - gsrAfterValue;
         Debug.Log(gsrBeforValue);
         Debug.Log(gsrAfterValue);
-        //gsrValue > 0.04??????
+        //gsrValue > 0.04で成功
 
-        //if????????
+        //if分岐は仮
         bool i = CompareMaxAndLatest();
-        //?????p?^?[??
+        //成功パターン
         if (!i)
         {
             audioSource.PlayOneShot(sound2);
@@ -69,7 +69,7 @@ public class Authenticity : MonoBehaviour
             _lightEffectObject.Play();
         }
 
-        //???s?p?^?[??
+        //失敗パターン
         else if (i)
         {
             audioSource.PlayOneShot(sound3);
@@ -84,7 +84,7 @@ public class Authenticity : MonoBehaviour
         }
     }
 
-    //?f?[?^??
+    //データ仮
     public SensorData GetGsrData()
     {
         SensorData sensorData = SensorDataManager.Instance.GetSensorData("gsr");
@@ -97,7 +97,7 @@ public class Authenticity : MonoBehaviour
            return null;
         }
 
-        //??
+        //仮
         //return 0.0F;
 
     }

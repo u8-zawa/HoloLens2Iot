@@ -22,7 +22,7 @@ namespace CustomVision.Value
             return JsonConvert.DeserializeObject<CustomVisionResult>(json);
         }
 
-        // �f�o�b�N�p
+        // デバック用
         override
         public string ToString()
         {
