@@ -45,7 +45,7 @@ Visual Studio Installer が開いたら、
   - [x] C++ (v142) ユニバーサル Windows プラットフォーム ツール
   - [x] DirectX 用グラフィックス デバッカーおよび GPU プロファイラー
   - [x] Windows 10 SDK (10.0.16299.0)
--[x] **個別のコンポーネント**
+- [x] **個別のコンポーネント**
   - [x] Windows 11 SDK (10.0.22000.0)  **(← OSがWindows11の場合必要になるかも)**
 
 ![Visual Studio Installer (2)](https://user-images.githubusercontent.com/78470202/201918817-561d5f94-60c4-4c3b-bdcb-225f61fe4f53.png)
