@@ -1,0 +1,2440 @@
+[
+    {
+        "id": "29867ef276f9b0ea",
+        "type": "tab",
+        "label": "センサー取得",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7abb7d751d1ab495",
+        "type": "tab",
+        "label": "追加命令作成",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d34c30d2ada12514",
+        "type": "tab",
+        "label": "削除命令作成",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b7bb51f10e7b7de0",
+        "type": "tab",
+        "label": "ログのみデータベース操作",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2ff0dfee14a63fa7",
+        "type": "tab",
+        "label": "検索",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "179db7f6a6c7a866",
+        "type": "subflow",
+        "name": "Subflow 1",
+        "info": "",
+        "in": [],
+        "out": []
+    },
+    {
+        "id": "631928733faef261",
+        "type": "junction",
+        "z": "d34c30d2ada12514",
+        "x": 560,
+        "y": 300,
+        "wires": [
+            [
+                "8aee7997a5bd809c"
+            ]
+        ]
+    },
+    {
+        "id": "36a1e66c12ed9a8e",
+        "type": "junction",
+        "z": "d34c30d2ada12514",
+        "x": 1000,
+        "y": 620,
+        "wires": [
+            [
+                "0a165b0eeeb04b3e"
+            ]
+        ]
+    },
+    {
+        "id": "ec0b067962683140",
+        "type": "wio-config"
+    },
+    {
+        "id": "ecefdde492e6bb18",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mqtt.beebotte.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "22b621b829bdc776",
+        "type": "wio-sensor",
+        "z": "29867ef276f9b0ea",
+        "name": "co2",
+        "connection": "ec0b067962683140",
+        "node": "23a49e738b76ecc9fa958bb8db23dd5a",
+        "port": "GroveCo2MhZ16:UART0",
+        "method": "concentration:concentration",
+        "output": "object",
+        "x": 410,
+        "y": 200,
+        "wires": [
+            [
+                "a5270d64f290f1e9"
+            ]
+        ]
+    },
+    {
+        "id": "67dbe63e87419f43",
+        "type": "switch",
+        "z": "29867ef276f9b0ea",
+        "name": "concentration is not null",
+        "property": "payload.concentration",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 870,
+        "y": 200,
+        "wires": [
+            [
+                "d3d2a23d31558aa9"
+            ]
+        ]
+    },
+    {
+        "id": "a5a088fca034cfe1",
+        "type": "inject",
+        "z": "29867ef276f9b0ea",
+        "name": "Get and Insert co2",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 200,
+        "wires": [
+            [
+                "22b621b829bdc776"
+            ]
+        ]
+    },
+    {
+        "id": "1bd076c2f2df8013",
+        "type": "link out",
+        "z": "29867ef276f9b0ea",
+        "name": "co2センサデータ取得(二酸化炭素濃度)",
+        "mode": "link",
+        "links": [
+            "ed743a4d0096eb9a",
+            "3fd83decc4dab038"
+        ],
+        "x": 1275,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "7e20d978dad621e0",
+        "type": "wio-sensor",
+        "z": "29867ef276f9b0ea",
+        "name": "gsr",
+        "connection": "ec0b067962683140",
+        "node": "23a49e738b76ecc9fa958bb8db23dd5a",
+        "port": "GenericAIn:A0",
+        "method": "analog:analog",
+        "output": "object",
+        "x": 410,
+        "y": 440,
+        "wires": [
+            [
+                "a3bda13a33f13261"
+            ]
+        ]
+    },
+    {
+        "id": "9cbea6c05b22eec6",
+        "type": "wio-sensor",
+        "z": "29867ef276f9b0ea",
+        "name": "ud",
+        "connection": "ec0b067962683140",
+        "node": "43e32ef85fbefe19b17dc63b0bead67e",
+        "port": "GroveUltraRanger:D0",
+        "method": "range_in_cm:range_cm",
+        "output": "object",
+        "x": 410,
+        "y": 560,
+        "wires": [
+            [
+                "77ab511839c9e1f1"
+            ]
+        ]
+    },
+    {
+        "id": "4041ccace9467f71",
+        "type": "inject",
+        "z": "29867ef276f9b0ea",
+        "name": "Get and Insert gsr",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 440,
+        "wires": [
+            [
+                "7e20d978dad621e0"
+            ]
+        ]
+    },
+    {
+        "id": "b0dc2e985f195f70",
+        "type": "inject",
+        "z": "29867ef276f9b0ea",
+        "name": "Get and Insert ud",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 560,
+        "wires": [
+            [
+                "9cbea6c05b22eec6"
+            ]
+        ]
+    },
+    {
+        "id": "d3b52286439ecd8e",
+        "type": "switch",
+        "z": "29867ef276f9b0ea",
+        "name": "analog is not null",
+        "property": "payload.analog",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 850,
+        "y": 440,
+        "wires": [
+            [
+                "a044fc5f186fbc65"
+            ]
+        ]
+    },
+    {
+        "id": "2b3729f4518465e4",
+        "type": "link out",
+        "z": "29867ef276f9b0ea",
+        "name": "gsrセンサデータ取得",
+        "mode": "link",
+        "links": [
+            "f9198eda2a16e1ad",
+            "968edc7749524353"
+        ],
+        "x": 1195,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "51ed5a5fcfd80966",
+        "type": "switch",
+        "z": "29867ef276f9b0ea",
+        "name": "range_cm is not null",
+        "property": "payload.range_cm",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 860,
+        "y": 560,
+        "wires": [
+            [
+                "f956184417cca13d"
+            ]
+        ]
+    },
+    {
+        "id": "65448b8eccd98eef",
+        "type": "link out",
+        "z": "29867ef276f9b0ea",
+        "name": "udセンサデータ取得",
+        "mode": "link",
+        "links": [
+            "f1db3950f29f5d3b",
+            "24952e2aa832967e"
+        ],
+        "x": 1235,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "f956184417cca13d",
+        "type": "change",
+        "z": "29867ef276f9b0ea",
+        "name": "range_cm -> value",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.value",
+                "pt": "msg",
+                "to": "payload.range_cm",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1090,
+        "y": 560,
+        "wires": [
+            [
+                "65448b8eccd98eef"
+            ]
+        ]
+    },
+    {
+        "id": "a044fc5f186fbc65",
+        "type": "function",
+        "z": "29867ef276f9b0ea",
+        "name": "ToVolt (value)",
+        "func": "msg.payload.value = msg.payload.analog * 0.0029;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1060,
+        "y": 440,
+        "wires": [
+            [
+                "2b3729f4518465e4"
+            ]
+        ]
+    },
+    {
+        "id": "57cc6328a3b7de53",
+        "type": "function",
+        "z": "29867ef276f9b0ea",
+        "name": "co2 DEMO",
+        "func": "// 400~1999で乱数\nmsg.payload = {\n    \"concentration\": Math.floor(Math.random()*1600) + 400\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 260,
+        "wires": [
+            [
+                "d3d2a23d31558aa9"
+            ]
+        ]
+    },
+    {
+        "id": "52792da7afcc9870",
+        "type": "function",
+        "z": "29867ef276f9b0ea",
+        "name": "gsr DEMO",
+        "func": "// 30~89で乱数\nmsg.payload = {\n    \"analog\": Math.floor(Math.random()*60) + 30\n    // \"analog\": 35\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 500,
+        "wires": [
+            [
+                "a044fc5f186fbc65"
+            ]
+        ]
+    },
+    {
+        "id": "7cd49b174a615b96",
+        "type": "function",
+        "z": "29867ef276f9b0ea",
+        "name": "ud DEMO",
+        "func": "// 170~229で乱数\nmsg.payload = {\n    \"range_cm\": Math.floor(Math.random()*60) + 170\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 620,
+        "wires": [
+            [
+                "f956184417cca13d"
+            ]
+        ]
+    },
+    {
+        "id": "a5270d64f290f1e9",
+        "type": "switch",
+        "z": "29867ef276f9b0ea",
+        "name": "Node is offline",
+        "property": "payload.error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "eq",
+                "v": "Node is offline",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 580,
+        "y": 200,
+        "wires": [
+            [
+                "67dbe63e87419f43"
+            ],
+            [
+                "57cc6328a3b7de53"
+            ]
+        ]
+    },
+    {
+        "id": "a3bda13a33f13261",
+        "type": "switch",
+        "z": "29867ef276f9b0ea",
+        "name": "Node is offline",
+        "property": "payload.error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "eq",
+                "v": "Node is offline",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 580,
+        "y": 440,
+        "wires": [
+            [
+                "d3b52286439ecd8e"
+            ],
+            [
+                "52792da7afcc9870"
+            ]
+        ]
+    },
+    {
+        "id": "77ab511839c9e1f1",
+        "type": "switch",
+        "z": "29867ef276f9b0ea",
+        "name": "Node is offline",
+        "property": "payload.error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "eq",
+                "v": "Node is offline",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 580,
+        "y": 560,
+        "wires": [
+            [
+                "51ed5a5fcfd80966"
+            ],
+            [
+                "7cd49b174a615b96"
+            ]
+        ]
+    },
+    {
+        "id": "d3d2a23d31558aa9",
+        "type": "change",
+        "z": "29867ef276f9b0ea",
+        "name": "concentration -> value",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.value",
+                "pt": "msg",
+                "to": "payload.concentration",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1120,
+        "y": 200,
+        "wires": [
+            [
+                "1bd076c2f2df8013"
+            ]
+        ]
+    },
+    {
+        "id": "5a89d235c0e6eaaa",
+        "type": "wio-sensor",
+        "z": "29867ef276f9b0ea",
+        "name": "temp",
+        "connection": "ec0b067962683140",
+        "node": "23a49e738b76ecc9fa958bb8db23dd5a",
+        "port": "GroveCo2MhZ16:UART0",
+        "method": "temperature:temperature",
+        "output": "object",
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "6f60161c37dd5d09"
+            ]
+        ]
+    },
+    {
+        "id": "64b9db7195c864f6",
+        "type": "switch",
+        "z": "29867ef276f9b0ea",
+        "name": "temperature is not null",
+        "property": "payload.temperature",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 860,
+        "y": 320,
+        "wires": [
+            [
+                "e3f595676310e3bb"
+            ]
+        ]
+    },
+    {
+        "id": "abc14cbfa41009a2",
+        "type": "inject",
+        "z": "29867ef276f9b0ea",
+        "d": true,
+        "name": "Get and Insert temp",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 320,
+        "wires": [
+            [
+                "5a89d235c0e6eaaa"
+            ]
+        ]
+    },
+    {
+        "id": "2425d8f9af8b3e1b",
+        "type": "link out",
+        "z": "29867ef276f9b0ea",
+        "name": "co2センサデータ取得(気温)",
+        "mode": "link",
+        "links": [
+            "3ed803152e424eac"
+        ],
+        "x": 1275,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "422dc35b2c366de0",
+        "type": "function",
+        "z": "29867ef276f9b0ea",
+        "name": "temp DEMO",
+        "func": "// 20~29で乱数\nmsg.payload = {\n    \"temperature\": Math.floor(Math.random()*10) + 20\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 380,
+        "wires": [
+            [
+                "e3f595676310e3bb"
+            ]
+        ]
+    },
+    {
+        "id": "6f60161c37dd5d09",
+        "type": "switch",
+        "z": "29867ef276f9b0ea",
+        "name": "Node is offline",
+        "property": "payload.error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "eq",
+                "v": "Node is offline",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 580,
+        "y": 320,
+        "wires": [
+            [
+                "64b9db7195c864f6"
+            ],
+            [
+                "422dc35b2c366de0"
+            ]
+        ]
+    },
+    {
+        "id": "e3f595676310e3bb",
+        "type": "change",
+        "z": "29867ef276f9b0ea",
+        "name": "temperature -> value",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.value",
+                "pt": "msg",
+                "to": "payload.temperature",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1120,
+        "y": 320,
+        "wires": [
+            [
+                "2425d8f9af8b3e1b"
+            ]
+        ]
+    },
+    {
+        "id": "9228684d30cf688f",
+        "type": "template",
+        "z": "7abb7d751d1ab495",
+        "name": "set temp Insert",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"tableName\": \"sensorDatas\",\n    \"action\": \"I\",\n    \"partitionKey\": \"temp\",\n    \"data\": {\n        \"Value\": \"{{payload.value}}\"\n    }\n}",
+        "output": "json",
+        "x": 700,
+        "y": 320,
+        "wires": [
+            [
+                "2f011e2f38502234",
+                "1057f69843c3cbe8"
+            ]
+        ]
+    },
+    {
+        "id": "76a9d19e278a4556",
+        "type": "template",
+        "z": "7abb7d751d1ab495",
+        "name": "set co2 Insert",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"tableName\": \"sensorDatas\",\n    \"action\": \"I\",\n    \"partitionKey\": \"co2\",\n    \"data\": {\n        \"Value\": \"{{payload.value}}\"\n    }\n}",
+        "output": "json",
+        "x": 700,
+        "y": 220,
+        "wires": [
+            [
+                "2f011e2f38502234",
+                "e98eb5db31641f86"
+            ]
+        ]
+    },
+    {
+        "id": "6be89a643a36bc68",
+        "type": "inject",
+        "z": "7abb7d751d1ab495",
+        "name": "Insert temp data",
+        "props": [
+            {
+                "p": "payload.value",
+                "v": "30.4",
+                "vt": "num"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 440,
+        "y": 320,
+        "wires": [
+            [
+                "9228684d30cf688f"
+            ]
+        ]
+    },
+    {
+        "id": "b29beb4465652a34",
+        "type": "inject",
+        "z": "7abb7d751d1ab495",
+        "name": "Insert co2 data",
+        "props": [
+            {
+                "p": "payload.value",
+                "v": "2000",
+                "vt": "num"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 440,
+        "y": 220,
+        "wires": [
+            [
+                "76a9d19e278a4556"
+            ]
+        ]
+    },
+    {
+        "id": "2f011e2f38502234",
+        "type": "change",
+        "z": "7abb7d751d1ab495",
+        "name": "set RowKey",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.rowKey",
+                "pt": "msg",
+                "to": "$fromMillis($millis())",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 990,
+        "y": 400,
+        "wires": [
+            [
+                "1c7dbe8f53d835d3"
+            ]
+        ]
+    },
+    {
+        "id": "ed743a4d0096eb9a",
+        "type": "link in",
+        "z": "7abb7d751d1ab495",
+        "name": "co2データ追加命令作成",
+        "links": [
+            "1bd076c2f2df8013"
+        ],
+        "x": 505,
+        "y": 260,
+        "wires": [
+            [
+                "76a9d19e278a4556"
+            ]
+        ]
+    },
+    {
+        "id": "1c7dbe8f53d835d3",
+        "type": "link out",
+        "z": "7abb7d751d1ab495",
+        "name": "追加命令完了",
+        "mode": "link",
+        "links": [
+            "e2f2a54c3151de70"
+        ],
+        "x": 1105,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "ca43eba78f8b6997",
+        "type": "template",
+        "z": "7abb7d751d1ab495",
+        "name": "set gsr Insert",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"tableName\": \"sensorDatas\",\n    \"action\": \"I\",\n    \"partitionKey\": \"gsr\",\n    \"data\": {\n        \"Value\": \"{{payload.value}}\"\n    }\n}",
+        "output": "json",
+        "x": 690,
+        "y": 420,
+        "wires": [
+            [
+                "2f011e2f38502234",
+                "963b49483e0f7505"
+            ]
+        ]
+    },
+    {
+        "id": "b6d910dcb468bf35",
+        "type": "template",
+        "z": "7abb7d751d1ab495",
+        "name": "set ud Insert",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"tableName\": \"sensorDatas\",\n    \"action\": \"I\",\n    \"partitionKey\": \"ud\",\n    \"data\": {\n        \"Value\": \"{{payload.value}}\"\n    }\n}",
+        "output": "json",
+        "x": 690,
+        "y": 520,
+        "wires": [
+            [
+                "2f011e2f38502234",
+                "16c7836d39c33db4"
+            ]
+        ]
+    },
+    {
+        "id": "f9198eda2a16e1ad",
+        "type": "link in",
+        "z": "7abb7d751d1ab495",
+        "name": "gsrデータ追加命令作成",
+        "links": [
+            "2b3729f4518465e4"
+        ],
+        "x": 505,
+        "y": 460,
+        "wires": [
+            [
+                "ca43eba78f8b6997"
+            ]
+        ]
+    },
+    {
+        "id": "f1db3950f29f5d3b",
+        "type": "link in",
+        "z": "7abb7d751d1ab495",
+        "name": "udデータ追加命令作成",
+        "links": [
+            "65448b8eccd98eef"
+        ],
+        "x": 505,
+        "y": 560,
+        "wires": [
+            [
+                "b6d910dcb468bf35"
+            ]
+        ]
+    },
+    {
+        "id": "f621fac51cc09b92",
+        "type": "inject",
+        "z": "7abb7d751d1ab495",
+        "name": "Insert gsr data",
+        "props": [
+            {
+                "p": "payload.value",
+                "v": "0.15",
+                "vt": "num"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 450,
+        "y": 420,
+        "wires": [
+            [
+                "ca43eba78f8b6997"
+            ]
+        ]
+    },
+    {
+        "id": "8b8c2ea4b479e140",
+        "type": "inject",
+        "z": "7abb7d751d1ab495",
+        "name": "Insert ud data",
+        "props": [
+            {
+                "p": "payload.value",
+                "v": "199",
+                "vt": "num"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 450,
+        "y": 520,
+        "wires": [
+            [
+                "b6d910dcb468bf35"
+            ]
+        ]
+    },
+    {
+        "id": "3ed803152e424eac",
+        "type": "link in",
+        "z": "7abb7d751d1ab495",
+        "name": "tempデータ追加命令作成",
+        "links": [
+            "2425d8f9af8b3e1b"
+        ],
+        "x": 505,
+        "y": 360,
+        "wires": [
+            [
+                "9228684d30cf688f"
+            ]
+        ]
+    },
+    {
+        "id": "1057f69843c3cbe8",
+        "type": "link out",
+        "z": "7abb7d751d1ab495",
+        "name": "tempデータ削除命令作成",
+        "mode": "link",
+        "links": [
+            "c5a5b9830ade81dc"
+        ],
+        "x": 765,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "963b49483e0f7505",
+        "type": "link out",
+        "z": "7abb7d751d1ab495",
+        "name": "gsrデータ削除命令作成",
+        "mode": "link",
+        "links": [
+            "7f10f4f7c6a6801b"
+        ],
+        "x": 745,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "16c7836d39c33db4",
+        "type": "link out",
+        "z": "7abb7d751d1ab495",
+        "name": "udデータ削除命令作成",
+        "mode": "link",
+        "links": [
+            "d8e9bd5386e4846c"
+        ],
+        "x": 745,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "e98eb5db31641f86",
+        "type": "link out",
+        "z": "7abb7d751d1ab495",
+        "name": "co2データ削除命令作成",
+        "mode": "link",
+        "links": [
+            "a5cb1833384b898b"
+        ],
+        "x": 765,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "a99518b0aaa60a22",
+        "type": "inject",
+        "z": "d34c30d2ada12514",
+        "name": "co2 Delete Query",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 140,
+        "wires": [
+            [
+                "262d932d6f7fe7d6"
+            ]
+        ]
+    },
+    {
+        "id": "b1e257ebea160d78",
+        "type": "inject",
+        "z": "d34c30d2ada12514",
+        "name": "temp Delete Query",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 240,
+        "wires": [
+            [
+                "35ae52c0c132108b"
+            ]
+        ]
+    },
+    {
+        "id": "262d932d6f7fe7d6",
+        "type": "change",
+        "z": "d34c30d2ada12514",
+        "name": "select co2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "_sensorName",
+                "pt": "msg",
+                "to": "co2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "631928733faef261"
+            ]
+        ]
+    },
+    {
+        "id": "35ae52c0c132108b",
+        "type": "change",
+        "z": "d34c30d2ada12514",
+        "name": "select temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "_sensorName",
+                "pt": "msg",
+                "to": "temp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 240,
+        "wires": [
+            [
+                "631928733faef261"
+            ]
+        ]
+    },
+    {
+        "id": "8aee7997a5bd809c",
+        "type": "template",
+        "z": "d34c30d2ada12514",
+        "name": "set Query",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"tableName\": \"sensorDatas\",\n    \"action\": \"Q\",\n    \"fromcolumn\": \"PartitionKey\",\n    \"where\": \"{{_sensorName}}\"\n}",
+        "output": "json",
+        "x": 680,
+        "y": 300,
+        "wires": [
+            [
+                "3ee78c3f82e31e26"
+            ]
+        ]
+    },
+    {
+        "id": "418eade7e99b71a8",
+        "type": "comment",
+        "z": "d34c30d2ada12514",
+        "name": "削除する対象を検索",
+        "info": "",
+        "x": 490,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "3ee78c3f82e31e26",
+        "type": "Aleph Table Storage",
+        "z": "d34c30d2ada12514",
+        "name": "Query Azure Table",
+        "debug": false,
+        "x": 350,
+        "y": 620,
+        "wires": [
+            [
+                "f0f30da72a5283ef"
+            ]
+        ]
+    },
+    {
+        "id": "0eee2e21b039b162",
+        "type": "switch",
+        "z": "d34c30d2ada12514",
+        "name": "",
+        "property": "payload[0].PartitionKey._",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "co2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "temp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "gsr",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ud",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 670,
+        "y": 620,
+        "wires": [
+            [
+                "a42db267a8277234"
+            ],
+            [
+                "b58152b4496c670a"
+            ],
+            [
+                "32713322acaaa47c"
+            ],
+            [
+                "42fec000deab483e"
+            ]
+        ]
+    },
+    {
+        "id": "a42db267a8277234",
+        "type": "function",
+        "z": "d34c30d2ada12514",
+        "name": "pick over size (co2)",
+        "func": "msg.payload = msg.payload.reverse().slice(10);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 560,
+        "wires": [
+            [
+                "36a1e66c12ed9a8e"
+            ]
+        ]
+    },
+    {
+        "id": "0d2afac4b6e457e2",
+        "type": "comment",
+        "z": "d34c30d2ada12514",
+        "name": "対象選別",
+        "info": "",
+        "x": 820,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "0a165b0eeeb04b3e",
+        "type": "split",
+        "z": "d34c30d2ada12514",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 1090,
+        "y": 620,
+        "wires": [
+            [
+                "fc4f150d74a15aaa"
+            ]
+        ]
+    },
+    {
+        "id": "d90feacee0628fd3",
+        "type": "comment",
+        "z": "d34c30d2ada12514",
+        "name": "削除対象リストから削除命令を作成",
+        "info": "",
+        "x": 1240,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "fc4f150d74a15aaa",
+        "type": "template",
+        "z": "d34c30d2ada12514",
+        "name": "set Delete",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"tableName\": \"sensorDatas\",\n    \"action\": \"D\",\n    \"partitionKey\": \"{{payload.PartitionKey._}}\",\n    \"rowKey\": \"{{payload.RowKey._}}\"\n}",
+        "output": "json",
+        "x": 1240,
+        "y": 620,
+        "wires": [
+            [
+                "0a2459e829c7b1f4"
+            ]
+        ]
+    },
+    {
+        "id": "6dab715ceda6a58e",
+        "type": "change",
+        "z": "d34c30d2ada12514",
+        "name": "select ud",
+        "rules": [
+            {
+                "t": "set",
+                "p": "_sensorName",
+                "pt": "msg",
+                "to": "ud",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 440,
+        "wires": [
+            [
+                "631928733faef261"
+            ]
+        ]
+    },
+    {
+        "id": "219caee0a2659227",
+        "type": "change",
+        "z": "d34c30d2ada12514",
+        "name": "select gsr",
+        "rules": [
+            {
+                "t": "set",
+                "p": "_sensorName",
+                "pt": "msg",
+                "to": "gsr",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 340,
+        "wires": [
+            [
+                "631928733faef261"
+            ]
+        ]
+    },
+    {
+        "id": "7f10f4f7c6a6801b",
+        "type": "link in",
+        "z": "d34c30d2ada12514",
+        "name": "gsrデータ量調整命令準備",
+        "links": [
+            "bdf7982b831a27d1",
+            "963b49483e0f7505",
+            "95076f2f4a6978ab"
+        ],
+        "x": 265,
+        "y": 380,
+        "wires": [
+            [
+                "219caee0a2659227"
+            ]
+        ]
+    },
+    {
+        "id": "a5cb1833384b898b",
+        "type": "link in",
+        "z": "d34c30d2ada12514",
+        "name": "co2データ量調整命令準備",
+        "links": [
+            "d24f79a756d62965",
+            "e98eb5db31641f86",
+            "f0da8c7e69fd0a99"
+        ],
+        "x": 265,
+        "y": 180,
+        "wires": [
+            [
+                "262d932d6f7fe7d6"
+            ]
+        ]
+    },
+    {
+        "id": "d8e9bd5386e4846c",
+        "type": "link in",
+        "z": "d34c30d2ada12514",
+        "name": "udデータ量調整命令準備",
+        "links": [
+            "abb9b7f0d6e877a0",
+            "16c7836d39c33db4",
+            "e56953e29d7b1483"
+        ],
+        "x": 265,
+        "y": 480,
+        "wires": [
+            [
+                "6dab715ceda6a58e"
+            ]
+        ]
+    },
+    {
+        "id": "b58152b4496c670a",
+        "type": "function",
+        "z": "d34c30d2ada12514",
+        "name": "pick over size (temp)",
+        "func": "msg.payload = msg.payload.reverse().slice(10);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 600,
+        "wires": [
+            [
+                "36a1e66c12ed9a8e"
+            ]
+        ]
+    },
+    {
+        "id": "32713322acaaa47c",
+        "type": "function",
+        "z": "d34c30d2ada12514",
+        "name": "pick over size (gsr)",
+        "func": "msg.payload = msg.payload.reverse().slice(10);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 640,
+        "wires": [
+            [
+                "36a1e66c12ed9a8e"
+            ]
+        ]
+    },
+    {
+        "id": "42fec000deab483e",
+        "type": "function",
+        "z": "d34c30d2ada12514",
+        "name": "pick over size (ud)",
+        "func": "msg.payload = msg.payload.reverse().slice(10);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 680,
+        "wires": [
+            [
+                "36a1e66c12ed9a8e"
+            ]
+        ]
+    },
+    {
+        "id": "0a2459e829c7b1f4",
+        "type": "link out",
+        "z": "d34c30d2ada12514",
+        "name": "削除命令作成完了",
+        "mode": "link",
+        "links": [
+            "e2f2a54c3151de70"
+        ],
+        "x": 1355,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "f0f30da72a5283ef",
+        "type": "switch",
+        "z": "d34c30d2ada12514",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 530,
+        "y": 620,
+        "wires": [
+            [
+                "0eee2e21b039b162"
+            ]
+        ]
+    },
+    {
+        "id": "9b8b1fd1da634b19",
+        "type": "inject",
+        "z": "d34c30d2ada12514",
+        "name": "gsr Delete Query",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 340,
+        "wires": [
+            [
+                "219caee0a2659227"
+            ]
+        ]
+    },
+    {
+        "id": "b46075e3d09e083a",
+        "type": "inject",
+        "z": "d34c30d2ada12514",
+        "name": "ud Delete Query",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 440,
+        "wires": [
+            [
+                "6dab715ceda6a58e"
+            ]
+        ]
+    },
+    {
+        "id": "c5a5b9830ade81dc",
+        "type": "link in",
+        "z": "d34c30d2ada12514",
+        "name": "tempデータ量調整命令準備",
+        "links": [
+            "d953da57226b39ab",
+            "1057f69843c3cbe8"
+        ],
+        "x": 265,
+        "y": 280,
+        "wires": [
+            [
+                "35ae52c0c132108b"
+            ]
+        ]
+    },
+    {
+        "id": "017cbe11f840e646",
+        "type": "comment",
+        "z": "b7bb51f10e7b7de0",
+        "name": "テーブル削除",
+        "info": "",
+        "x": 510,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "1ab2a387e34f151c",
+        "type": "inject",
+        "z": "b7bb51f10e7b7de0",
+        "name": "Delete Table",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"tableName\":\"sensorDatas\",\"action\":\"DT\"}",
+        "payloadType": "json",
+        "x": 510,
+        "y": 440,
+        "wires": [
+            [
+                "7a6d67192fd843a2"
+            ]
+        ]
+    },
+    {
+        "id": "7a6d67192fd843a2",
+        "type": "Aleph Table Storage",
+        "z": "b7bb51f10e7b7de0",
+        "name": "LogOnly Azure Table",
+        "debug": false,
+        "x": 720,
+        "y": 360,
+        "wires": [
+            [
+                "a6b16647e6c24739"
+            ]
+        ]
+    },
+    {
+        "id": "a6b16647e6c24739",
+        "type": "debug",
+        "z": "b7bb51f10e7b7de0",
+        "name": "Log",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "e2f2a54c3151de70",
+        "type": "link in",
+        "z": "b7bb51f10e7b7de0",
+        "name": "テーブル操作（ログ出力のみ）",
+        "links": [
+            "0a2459e829c7b1f4",
+            "1c7dbe8f53d835d3",
+            "438d56a0e242f5e1"
+        ],
+        "x": 565,
+        "y": 360,
+        "wires": [
+            [
+                "7a6d67192fd843a2"
+            ]
+        ]
+    },
+    {
+        "id": "951c3ac3fd42e47a",
+        "type": "Aleph Table Storage",
+        "z": "2ff0dfee14a63fa7",
+        "name": "Query Azure Table",
+        "debug": false,
+        "x": 850,
+        "y": 340,
+        "wires": [
+            [
+                "1a4d307091c23d21"
+            ]
+        ]
+    },
+    {
+        "id": "f02e761bdd1c2a74",
+        "type": "inject",
+        "z": "2ff0dfee14a63fa7",
+        "name": "temp Query",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "_sensorName",
+                "v": "temp",
+                "vt": "str"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 330,
+        "y": 300,
+        "wires": [
+            [
+                "05fe6e4101429ed9"
+            ]
+        ]
+    },
+    {
+        "id": "cba9e278b1ae5df1",
+        "type": "inject",
+        "z": "2ff0dfee14a63fa7",
+        "name": "co2 Query",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "_sensorName",
+                "v": "co2",
+                "vt": "str"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 260,
+        "wires": [
+            [
+                "77030d6234d2874a"
+            ]
+        ]
+    },
+    {
+        "id": "3de3646363df62bb",
+        "type": "comment",
+        "z": "2ff0dfee14a63fa7",
+        "name": "検索命令作成",
+        "info": "",
+        "x": 690,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "d2f7c81c7c707826",
+        "type": "comment",
+        "z": "2ff0dfee14a63fa7",
+        "name": "処理用にデータ整形",
+        "info": "",
+        "x": 1050,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "603f215e398f34c1",
+        "type": "calculator",
+        "z": "2ff0dfee14a63fa7",
+        "name": "",
+        "inputMsgField": "payload.datas",
+        "outputMsgField": "payload.stat.avg",
+        "operation": "avg",
+        "constant": "",
+        "round": false,
+        "decimals": 0,
+        "x": 660,
+        "y": 480,
+        "wires": [
+            [
+                "f3cff0b2f13803b5"
+            ]
+        ]
+    },
+    {
+        "id": "66a71d9fe6c10eb9",
+        "type": "change",
+        "z": "2ff0dfee14a63fa7",
+        "name": "最新値取得",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.stat.latest",
+                "pt": "msg",
+                "to": "payload.datas[$count(payload.datas) - 1]",
+                "tot": "jsonata",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 480,
+        "wires": [
+            [
+                "603f215e398f34c1"
+            ]
+        ]
+    },
+    {
+        "id": "1a4d307091c23d21",
+        "type": "switch",
+        "z": "2ff0dfee14a63fa7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1010,
+        "y": 340,
+        "wires": [
+            [
+                "9c65cd9f1ba279ef"
+            ],
+            [
+                "6ccb4be8b513c31d"
+            ]
+        ]
+    },
+    {
+        "id": "e6b65419fdbf03ed",
+        "type": "comment",
+        "z": "2ff0dfee14a63fa7",
+        "name": "基本統計量計算",
+        "info": "",
+        "x": 520,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f3cff0b2f13803b5",
+        "type": "calculator",
+        "z": "2ff0dfee14a63fa7",
+        "name": "",
+        "inputMsgField": "payload.datas",
+        "outputMsgField": "payload.stat.max",
+        "operation": "max",
+        "constant": "",
+        "round": false,
+        "decimals": 0,
+        "x": 800,
+        "y": 480,
+        "wires": [
+            [
+                "a8a4e6da29f4eb7e"
+            ]
+        ]
+    },
+    {
+        "id": "a8a4e6da29f4eb7e",
+        "type": "calculator",
+        "z": "2ff0dfee14a63fa7",
+        "name": "",
+        "inputMsgField": "payload.datas",
+        "outputMsgField": "payload.stat.min",
+        "operation": "min",
+        "constant": "",
+        "round": false,
+        "decimals": 0,
+        "x": 940,
+        "y": 480,
+        "wires": [
+            [
+                "08d75275a5e41c0b",
+                "2e2e76d80f85221c"
+            ]
+        ]
+    },
+    {
+        "id": "03d184c617051887",
+        "type": "template",
+        "z": "2ff0dfee14a63fa7",
+        "name": "set Query",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"tableName\": \"sensorDatas\",\n    \"action\": \"Q\",\n    \"fromcolumn\": \"PartitionKey\",\n    \"where\": \"{{_sensorName}}\"\n}",
+        "output": "json",
+        "x": 680,
+        "y": 340,
+        "wires": [
+            [
+                "951c3ac3fd42e47a"
+            ]
+        ]
+    },
+    {
+        "id": "05fe6e4101429ed9",
+        "type": "change",
+        "z": "2ff0dfee14a63fa7",
+        "name": "select temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "_sensorName",
+                "pt": "msg",
+                "to": "temp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 300,
+        "wires": [
+            [
+                "03d184c617051887"
+            ]
+        ]
+    },
+    {
+        "id": "77030d6234d2874a",
+        "type": "change",
+        "z": "2ff0dfee14a63fa7",
+        "name": "select co2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "_sensorName",
+                "pt": "msg",
+                "to": "co2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 260,
+        "wires": [
+            [
+                "03d184c617051887"
+            ]
+        ]
+    },
+    {
+        "id": "6ccb4be8b513c31d",
+        "type": "change",
+        "z": "2ff0dfee14a63fa7",
+        "name": "データの整形",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.res.name",
+                "pt": "msg",
+                "to": "payload[0].PartitionKey._",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload.res.datas",
+                "pt": "msg",
+                "to": "$map(*.Value._, function($data) { $number($data) })",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload.res.times",
+                "pt": "msg",
+                "to": "$map(*.RowKey._, function($value) { $toMillis($value) } )",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.res",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 480,
+        "wires": [
+            [
+                "66a71d9fe6c10eb9"
+            ]
+        ]
+    },
+    {
+        "id": "9c65cd9f1ba279ef",
+        "type": "template",
+        "z": "2ff0dfee14a63fa7",
+        "name": "empty case",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"name\": \"null\",\n    \"datas\": [],\n    \"times\": [],\n    \"stat\": {}\n}",
+        "output": "json",
+        "x": 1170,
+        "y": 340,
+        "wires": [
+            [
+                "2e2e76d80f85221c"
+            ]
+        ]
+    },
+    {
+        "id": "e0dc241046c9d216",
+        "type": "mqtt in",
+        "z": "2ff0dfee14a63fa7",
+        "name": "",
+        "topic": "prmn_iot/get_sensor_data",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ecefdde492e6bb18",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "df4f039e3d5bcea6"
+            ]
+        ]
+    },
+    {
+        "id": "df4f039e3d5bcea6",
+        "type": "switch",
+        "z": "2ff0dfee14a63fa7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "co2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "temp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "gsr",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ud",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 350,
+        "y": 180,
+        "wires": [
+            [
+                "77030d6234d2874a"
+            ],
+            [
+                "05fe6e4101429ed9"
+            ],
+            [
+                "84e8d73f14eabcbe"
+            ],
+            [
+                "04efa82af5770c5c"
+            ]
+        ]
+    },
+    {
+        "id": "2e2e76d80f85221c",
+        "type": "debug",
+        "z": "2ff0dfee14a63fa7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1270,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "9aa725c7fe914f7e",
+        "type": "mqtt out",
+        "z": "2ff0dfee14a63fa7",
+        "name": "",
+        "topic": "prmn_iot/co2",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ecefdde492e6bb18",
+        "x": 1270,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "84e8d73f14eabcbe",
+        "type": "change",
+        "z": "2ff0dfee14a63fa7",
+        "name": "select gsr",
+        "rules": [
+            {
+                "t": "set",
+                "p": "_sensorName",
+                "pt": "msg",
+                "to": "gsr",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 340,
+        "wires": [
+            [
+                "03d184c617051887"
+            ]
+        ]
+    },
+    {
+        "id": "04efa82af5770c5c",
+        "type": "change",
+        "z": "2ff0dfee14a63fa7",
+        "name": "select ud",
+        "rules": [
+            {
+                "t": "set",
+                "p": "_sensorName",
+                "pt": "msg",
+                "to": "ud",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 380,
+        "wires": [
+            [
+                "03d184c617051887"
+            ]
+        ]
+    },
+    {
+        "id": "0e6061fa96e84096",
+        "type": "inject",
+        "z": "2ff0dfee14a63fa7",
+        "name": "gsr Query",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "_sensorName",
+                "v": "gsr",
+                "vt": "str"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 340,
+        "wires": [
+            [
+                "84e8d73f14eabcbe"
+            ]
+        ]
+    },
+    {
+        "id": "90ce2f22525dacf5",
+        "type": "inject",
+        "z": "2ff0dfee14a63fa7",
+        "name": "ud Query",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "_sensorName",
+                "v": "ud",
+                "vt": "str"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 380,
+        "wires": [
+            [
+                "04efa82af5770c5c"
+            ]
+        ]
+    },
+    {
+        "id": "e5a0f25c8ddef188",
+        "type": "mqtt out",
+        "z": "2ff0dfee14a63fa7",
+        "name": "",
+        "topic": "prmn_iot/gsr",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ecefdde492e6bb18",
+        "x": 1270,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "5e748f73d6837390",
+        "type": "mqtt out",
+        "z": "2ff0dfee14a63fa7",
+        "name": "",
+        "topic": "prmn_iot/ud",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ecefdde492e6bb18",
+        "x": 1270,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "08d75275a5e41c0b",
+        "type": "switch",
+        "z": "2ff0dfee14a63fa7",
+        "name": "",
+        "property": "payload.name",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "co2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "temp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "gsr",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ud",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 1090,
+        "y": 580,
+        "wires": [
+            [
+                "9aa725c7fe914f7e"
+            ],
+            [
+                "5b965e121649705c"
+            ],
+            [
+                "e5a0f25c8ddef188"
+            ],
+            [
+                "5e748f73d6837390"
+            ]
+        ]
+    },
+    {
+        "id": "5b965e121649705c",
+        "type": "mqtt out",
+        "z": "2ff0dfee14a63fa7",
+        "name": "",
+        "topic": "prmn_iot/temp",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ecefdde492e6bb18",
+        "x": 1280,
+        "y": 560,
+        "wires": []
+    }
+]

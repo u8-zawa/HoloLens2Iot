@@ -7,7 +7,7 @@ public class CO2InfoTextUI : MonoBehaviour
     private TextMeshProUGUI TextUI;
 
     [SerializeField] private Spawner spawner;
-    [SerializeField, TextArea(3, 5)] private string textFormat = "“ñ_‰»’Y‘f”Z“xF{0}A“ñ_‰»’Y‘fŒÂ”F{1}";
+    [SerializeField, TextArea(3, 5)] private string textFormat = "ï¿½ï¿½_ï¿½ï¿½ï¿½Yï¿½fï¿½Zï¿½xï¿½F{0}ï¿½Aï¿½ï¿½_ï¿½ï¿½ï¿½Yï¿½fï¿½Âï¿½ï¿½F{1}";
 
     private int CO2ModelN = 0;
     private float CO2Value = 0;
@@ -23,9 +23,9 @@ public class CO2InfoTextUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // ’l‚Ìæ“¾
+        // ï¿½lï¿½Ìæ“¾
         bool flag = false;
-        SensorData sensorData = SensorDataManager.Instance.GetSensorData("CO2");
+        SensorData sensorData = SensorDataManager.Instance.GetSensorData("co2");
         if (sensorData != null && sensorData.Stat.Latest != CO2Value)
         {
             CO2Value = sensorData.Stat.Latest;
@@ -40,14 +40,14 @@ public class CO2InfoTextUI : MonoBehaviour
             flag = true;
         }
 
-        // ƒeƒLƒXƒg‚ÌXV
+        // ï¿½eï¿½Lï¿½Xï¿½gï¿½ÌXï¿½V
         if (flag)
         {
             UpdateText();
         }
     }
 
-    // •\¦“à—e‚ÌXV
+    // ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ÌXï¿½V
     private void UpdateText()
     {
         string message;

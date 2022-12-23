@@ -5399,7 +5399,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CO2
+          m_StringArgument: co2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1125925885
@@ -8805,6 +8805,10 @@ MonoBehaviour:
   maxValue: 3000
   minValue: 300
   setXValue: 1
+  setYAxisName: 0
+  YAxisNameOffset: {x: 0, y: 20, z: 0}
+  YAxisName: "\u96FB\u5727(V)"
+  NumericFormatter: 0.00
 --- !u!1 &1815547181
 GameObject:
   m_ObjectHideFlags: 0

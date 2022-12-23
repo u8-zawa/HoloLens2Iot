@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject prefab; // ¶¬‚·‚éƒIƒuƒWƒFƒNƒgiPrefabj
-    [SerializeField] private int MinNum = 3;    // ƒIƒuƒWƒFƒNƒg‚ÌÅ¬¶¬”
-    [SerializeField] private int MaxNum = 30;   // ƒIƒuƒWƒFƒNƒg‚ÌÅ‘å¶¬”
+    [SerializeField] private GameObject prefab; // ç”Ÿæˆã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆï¼ˆPrefabï¼‰
+    [SerializeField] private int MinNum = 3;    // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æœ€å°ç”Ÿæˆæ•°
+    [SerializeField] private int MaxNum = 30;   // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æœ€å¤§ç”Ÿæˆæ•°
 
-    [SerializeField] private int MinValue = 300;     // ƒIƒuƒWƒFƒNƒg‚Ì”‚ªÅ¬‚Æ‚È‚é‚Æ‚«‚ÌƒZƒ“ƒT[‘ª’è’l
-    [SerializeField] private int MaxValue = 2000;    // ƒIƒuƒWƒFƒNƒg‚Ì”‚ªÅ‘å‚Æ‚È‚é‚Æ‚«‚ÌƒZƒ“ƒT[‘ª’è’l
-    public int nowNum = 0;                      // Œ»İ‚ÌƒIƒuƒWƒFƒNƒg‚Ìİ’è”
+    [SerializeField] private int MinValue = 300;     // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ•°ãŒæœ€å°ã¨ãªã‚‹ã¨ãã®ã‚»ãƒ³ã‚µãƒ¼æ¸¬å®šå€¤
+    [SerializeField] private int MaxValue = 2000;    // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ•°ãŒæœ€å¤§ã¨ãªã‚‹ã¨ãã®ã‚»ãƒ³ã‚µãƒ¼æ¸¬å®šå€¤
+    public int nowNum = 0;                      // ç¾åœ¨ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®è¨­å®šæ•°
 
-    private List<GameObject> objects = new List<GameObject>();  // ŠÇ—‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚ÌƒŠƒXƒg
-    private bool isSpawnable => objects.Count < MaxNum; // ¶¬‰Â”\‚©‚Ìƒtƒ‰ƒO
+    private List<GameObject> objects = new List<GameObject>();  // ç®¡ç†ã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒªã‚¹ãƒˆ
+    private bool isSpawnable => objects.Count < MaxNum; // ç”Ÿæˆå¯èƒ½ã‹ã®ãƒ•ãƒ©ã‚°
 
-    public int Num => objects.Count;    // Œ»İŠÇ—‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Ì”
+    public int Num => objects.Count;    // ç¾åœ¨ç®¡ç†ã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ•°
 
     private void Start()
     {
@@ -23,8 +23,8 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        // ƒIƒuƒWƒFƒNƒg‚Ìİ’è”‚ÆŠÇ—”‚É·‚ª‚ ‚éê‡A‚»‚Ì•ª‚¾‚¯ƒIƒuƒWƒFƒNƒg‚ğ’Ç‰ÁEíœ‚·‚é
-        if( nowNum < Num ) {
+        // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®è¨­å®šæ•°ã¨ç®¡ç†æ•°ã«å·®ãŒã‚ã‚‹å ´åˆã€ãã®åˆ†ã ã‘ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿½åŠ ãƒ»å‰Šé™¤ã™ã‚‹
+        if ( nowNum < Num ) {
             Sub(Num - nowNum);
         }
         else if(nowNum > Num)
@@ -33,21 +33,21 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    // ƒZƒ“ƒT[‚ÌŒÂ”‚ğƒZƒ“ƒT[î•ñ‚©‚çXV‚·‚é
+    // ã‚»ãƒ³ã‚µãƒ¼ã®å€‹æ•°ã‚’ã‚»ãƒ³ã‚µãƒ¼æƒ…å ±ã‹ã‚‰æ›´æ–°ã™ã‚‹
     public void UpdateNowNum()
     {
-        // ƒZƒ“ƒT[‚Ì‘ª’è’l‚ğæ“¾
+        // ã‚»ãƒ³ã‚µãƒ¼ã®æ¸¬å®šå€¤ã‚’å–å¾—
         SensorDataManager sdm = SensorDataManager.Instance;
-        if (sdm == null || sdm.GetSensorData("CO2") == null)
+        if (sdm == null || sdm.GetSensorData("co2") == null)
         {
             return;
         }
-        float nowValue = sdm.GetSensorData("CO2").Stat.Latest;
-        // Œ»İ‚ÌŒÂ”‚ğŒvZ
+        float nowValue = sdm.GetSensorData("co2").Stat.Latest;
+        // ç¾åœ¨ã®å€‹æ•°ã‚’è¨ˆç®—
         nowNum = (int)Mathf.Round(MinNum + (float)(MaxNum - MinNum) * (nowValue - MinValue) / (MaxValue - MinValue));
     }
 
-    // ”‚ğw’è‚µ‚ÄA‚»‚Ì•ªƒIƒuƒWƒFƒNƒg‚ğ‘‚â‚·
+    // æ•°ã‚’æŒ‡å®šã—ã¦ã€ãã®åˆ†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å¢—ã‚„ã™
     private void Add(int n = 1)
     {
         if (n <= 0 || Num >= MaxNum) return;
@@ -57,7 +57,7 @@ public class Spawner : MonoBehaviour
             CreateObject();
         }
     }
-    // ”‚ğw’è‚µ‚ÄA‚»‚Ì•ªƒIƒuƒWƒFƒNƒg‚ğŒ¸‚ç‚·
+    // æ•°ã‚’æŒ‡å®šã—ã¦ã€ãã®åˆ†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¸›ã‚‰ã™
     private void Sub(int n = 0)
     {
         if (n <= 0) return;
@@ -71,18 +71,18 @@ public class Spawner : MonoBehaviour
     }
 
 
-    // V‚µ‚­ƒIƒuƒWƒFƒNƒg‚ğ¶‚İo‚·
+    // æ–°ã—ãã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿã¿å‡ºã™
     private void CreateObject()
     {
         if (isSpawnable)
         {
-            // V‚µ‚­ƒIƒuƒWƒFƒNƒg‚ğ¶‚İo‚·
+            // æ–°ã—ãã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿã¿å‡ºã™
             GameObject newObject = Instantiate(prefab, transform.position, Quaternion.identity, transform.parent);
             objects.Add(newObject);
         }
     }
 
-    // ƒIƒuƒWƒFƒNƒg‚ğÁ‚·
+    // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¶ˆã™
     private void DestroyObject(GameObject targetObject)
     {
         if(objects.Contains(targetObject))
