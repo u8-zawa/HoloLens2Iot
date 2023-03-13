@@ -14,7 +14,7 @@
 > インストーラー バージョン 3.4.2244.14676\
 > Visual Studio Community 2019 16.11.21
 
-<https://learn.microsoft.com/ja-jp/visualstudio/releases/2019/release-notes>
+<p><a href="https://learn.microsoft.com/ja-jp/visualstudio/releases/2019/release-notes" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/ja-jp/visualstudio/releases/2019/release-notes</a></p>
 
 ![Visual Studio 2019 のダウンロード](https://user-images.githubusercontent.com/78470202/201889808-91d0b9e1-e185-413a-918d-117028854359.png)
 
